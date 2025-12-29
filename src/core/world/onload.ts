@@ -181,6 +181,16 @@ export function applyOnload(world: World, onload?: string[]): World {
     console.warn('[World Onload] execution failed:', e);
   }
 
+  // Persist default background and per-cell tiles so renderer can pick automatically
+  (w as any).backgroundDefault = defaultFill ?? DEFAULT_TILE;
+  if (background.size > 0) {
+    const obj: Record<string, string> = {};
+    for (const [k, v] of background.entries()) {
+      obj[k] = v;
+    }
+    (w as any).backgroundTiles = obj;
+  }
+
   // Attach dynamic goal if any were defined during onload
   if ((dynGoal.objects && Object.keys(dynGoal.objects).length > 0) || (dynGoal.walls && Object.keys(dynGoal.walls).length > 0)) {
     (w as any).goal = (w as any).goal || {};

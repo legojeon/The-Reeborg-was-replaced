@@ -15,6 +15,10 @@ export interface World {
   height: number;
   robot: RobotPose;
   walls: Array<{ x: number; y: number; dir?: Direction; goalMark?: boolean }>;
+  // Default background tile kind (from onload fill_background), used by renderer
+  backgroundDefault?: string;
+  // Per-cell background tiles "x,y" -> TileKind
+  backgroundTiles?: Record<string, string>;
   objects?: Array<{
     x: number;
     y: number;

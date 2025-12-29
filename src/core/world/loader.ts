@@ -2,6 +2,7 @@ import type { Direction, World } from '../types/types';
 import { applyOnload } from './onload';
 import { parseGoal, mergeGoals } from './goal';
 import { isObjectKind } from './objectKinds';
+import { isTileKind } from './tileKinds';
 
 type ReeborgWorld = {
   rows: number;
@@ -129,6 +130,24 @@ export async function loadReeborgWorld(path: string): Promise<World> {
     description: data.description
   };
   const withOnload = applyOnload(world, data.onload);
+  // Merge static tiles from JSON ('tiles' section) into backgroundTiles/backgroundDefault
+  if ((data as any).tiles && typeof (data as any).tiles === 'object') {
+    const tilesSrc = (data as any).tiles as Record<string, string[]>;
+    const tilesObj: Record<string, string> = { ...(withOnload as any).backgroundTiles ?? {} };
+    for (const [coord, kinds] of Object.entries(tilesSrc)) {
+      if (!Array.isArray(kinds) || kinds.length === 0) continue;
+      const name = String(kinds[0] ?? '').trim();
+      const norm = name.toLowerCase().replace(/[\s\-]+/g, '_');
+      const alias: Record<string, string> = { brics: 'bricks', brick: 'bricks', palegrass: 'pale_grass', pale_grn: 'pale_grass' };
+      const picked = isTileKind(norm as any) ? norm : (alias[norm] ?? '');
+      if (picked && isTileKind(picked as any)) {
+        tilesObj[coord] = picked;
+      }
+    }
+    if (Object.keys(tilesObj).length > 0) {
+      (withOnload as any).backgroundTiles = tilesObj;
+    }
+  }
   const parsedGoal = parseGoal(data.goal);
   (withOnload as any).goal = mergeGoals((withOnload as any).goal, parsedGoal);
   return withOnload;

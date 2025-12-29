@@ -1,5 +1,7 @@
-import { AmbientLight, CylinderGeometry, Color, DirectionalLight, Mesh, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, Scene, Vector3, WebGLRenderer } from 'three';
+import { AmbientLight, CylinderGeometry, Color, DirectionalLight, Group, HemisphereLight, Mesh, MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, Scene, Vector3, WebGLRenderer, ACESFilmicToneMapping, SRGBColorSpace } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { World, Direction, RobotPose } from '../types/types';
 import { dirToRad, dirToVec, mapX1BasedToScene, mapZ1BasedToScene } from './utils';
 import { createGrid } from './grid';
@@ -22,11 +24,18 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
 
   const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: false });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  // Improve perceived brightness/saturation with ACES tone mapping and sRGB output
+  (renderer as any).toneMapping = ACESFilmicToneMapping;
+  (renderer as any).toneMappingExposure = 1.25;
+  if ('outputColorSpace' in renderer) {
+    (renderer as any).outputColorSpace = SRGBColorSpace;
+  }
 
   const amb = new AmbientLight(0xffffff, 0.6);
   const dir = new DirectionalLight(0xffffff, 0.8);
   dir.position.set(5, 10, 7);
-  scene.add(amb, dir);
+  const hemi = new HemisphereLight(0xffffff, 0x404040, 0.5);
+  scene.add(amb, dir, hemi);
 
   // Mouse camera controls
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -74,12 +83,71 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
   let { group: objectsGroup, dispose: disposeObjects } = createObjects(world);
   scene.add(objectsGroup);
 
+  // Robot: start with a simple primitive immediately, then swap to GLB when loaded
   const robotGeom = new CylinderGeometry(0.5, 0.5, 0.5, 3, 1, false); // triangular prism
   const robotMat = new MeshStandardMaterial({ color: 0x3b82f6, flatShading: true }); // bright blue
-  const robot = new Mesh(robotGeom, robotMat);
+  let robot: InstanceType<typeof Mesh> | InstanceType<typeof Group> = new Mesh(robotGeom, robotMat);
+  let robotIsGLB = false;
+  let disposeGLB: (() => void) | null = null;
+  // Placement/scale tuning
+  const ROBOT_Y = 0;          // slightly lower than before (was 0.45)
+  const PRIMITIVE_SCALE = 1.2;   // make the primitive a bit larger
+  const GLB_SCALE = 1.3;        // make the GLB model slightly larger than default
+  (robot as any).scale.setScalar(PRIMITIVE_SCALE);
+  const ROBOT_URL = new URL('../../assets/robot.glb', import.meta.url).href;
+  const gltfLoader = new GLTFLoader();
+  gltfLoader.load(
+    ROBOT_URL,
+    (gltf: GLTF) => {
+      try {
+        const model = gltf.scene || gltf.scenes?.[0];
+        if (!model) return;
+        // Position/rotation match the primitive; set scale if needed
+        model.position.copy((robot as any).position);
+        model.rotation.copy((robot as any).rotation);
+        // Heuristic scale so it roughly fits the previous primitive footprint
+        model.scale.setScalar(GLB_SCALE);
+        // Ensure default color matches primitive's blue (0x3b82f6)
+        const defaultColor = new Color(0x3b82f6);
+        model.traverse((n: any) => {
+          if (n.isMesh && n.material) {
+            const mats = Array.isArray(n.material) ? n.material : [n.material];
+            for (const m of mats) {
+              if (m?.color) {
+                m.color = defaultColor.clone();
+                m.needsUpdate = true;
+              }
+            }
+          }
+        });
+        // Swap in scene
+        scene.remove(robot as any);
+        scene.add(model);
+        robot = model;
+        robotIsGLB = true;
+        // Prepare disposer for GLB (dispose geometries/materials on destroy)
+        disposeGLB = () => {
+          model.traverse((n: any) => {
+            if (n.isMesh) {
+              n.geometry?.dispose?.();
+              const mat = n.material;
+              if (Array.isArray(mat)) mat.forEach(m => m?.dispose?.());
+              else mat?.dispose?.();
+            }
+          });
+        };
+      } catch {
+        // keep primitive if anything goes wrong
+      }
+    },
+    undefined,
+    () => {
+      // loading error -> keep primitive silently
+    }
+  );
   // Internal coordinates are 1-based; map to scene units with bottom-origin:
   // x -> x - 1, z -> (height - y)
-  robot.position.set(world.robot.x - 1, 0.45, (world.height - world.robot.y));
+  robot.position.set(world.robot.x - 1, ROBOT_Y, (world.height - world.robot.y));
   // Orient the prism axis along -Z so a triangle vertex faces forward, then yaw to dir
   robot.rotation.y = dirToRad(world.robot.dir) + (Math.PI);
   scene.add(robot);
@@ -93,7 +161,7 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
   let rotateEndYaw = robot.rotation.y;
   let viewMode: 'iso' | 'first' = 'iso';
   // First-person tuning: slightly higher eye and a bit in front of the robot to avoid occlusion
-  const firstEyeHeight = 0.2;
+  const firstEyeHeight = 0.8;
   const firstFrontOffset = 0.1; // distance in front of robot along its facing vector
   const firstLookDist = 0.5;    // how far ahead to look from the eye
   let firstYawRad = 0; // continuous yaw offset relative to robot dir, clamped [-PI/2, +PI/2]
@@ -191,7 +259,7 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
 
   function updateRobotPose(pose: RobotPose, opts?: { reverse?: boolean }) {
     // Map 1-based grid coordinate to scene with bottom-origin
-    robot.position.set(mapX1BasedToScene(pose.x), 0.45, mapZ1BasedToScene(pose.y, world.height));
+    robot.position.set(mapX1BasedToScene(pose.x), ROBOT_Y, mapZ1BasedToScene(pose.y, world.height));
     if (viewMode === 'first') {
       // derive viewing vector from robot dir rotated by firstYawRad (clamped)
       const base = dirToVec(pose.dir);
@@ -228,6 +296,10 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
     }
   }
 
+  // simple signatures to avoid unnecessary rebuilds (reduces flicker)
+  let lastObjectsSig = JSON.stringify(world.objects ?? []);
+  let lastWallsSig = JSON.stringify(world.walls ?? []);
+
   return {
     destroy() {
       renderer.setAnimationLoop(null);
@@ -240,8 +312,12 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
       if (goalOverlayMat) goalOverlayMat.dispose();
       disposeWalls();
       disposeObjects();
-      robotGeom.dispose();
-      robotMat.dispose();
+      if (robotIsGLB) {
+        disposeGLB?.();
+      } else {
+        robotGeom.dispose();
+        robotMat.dispose();
+      }
       controls.dispose();
       renderer.domElement.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointermove', onPointerMove);
@@ -250,8 +326,23 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
     },
     updateRobot: updateRobotPose,
     setRobotColor(color: number | string) {
-      robotMat.color = new Color(color as any);
-      robotMat.needsUpdate = true;
+      if (robotIsGLB) {
+        // Traverse and update any material with color
+        (robot as any).traverse((n: any) => {
+          if (n.isMesh && n.material) {
+            const mats = Array.isArray(n.material) ? n.material : [n.material];
+            for (const m of mats) {
+              if (m?.color) {
+                m.color = new Color(color as any);
+                m.needsUpdate = true;
+              }
+            }
+          }
+        });
+      } else {
+        robotMat.color = new Color(color as any);
+        robotMat.needsUpdate = true;
+      }
     },
     resetView() {
       controls.target.copy(center);
@@ -277,10 +368,13 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
       }
     },
     updateObjects(objects) {
+      const list = objects ?? [];
+      const sig = JSON.stringify(list);
+      if (sig === lastObjectsSig) return; // no change; skip rebuild
+      lastObjectsSig = sig;
       // rebuild objects
       scene.remove(objectsGroup);
       disposeObjects();
-      const list = objects ?? [];
       // Preserve goal overlays by rebuilding via createObjects with a temp world snapshot
       const tempWorld: World = {
         ...world,
@@ -292,9 +386,12 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
       scene.add(objectsGroup);
     },
     updateWalls(walls) {
+      const list = walls ?? [];
+      const sig = JSON.stringify(list);
+      if (sig === lastWallsSig) return; // no change; skip rebuild
+      lastWallsSig = sig;
       scene.remove(wallsGroup);
       disposeWalls();
-      const list = walls ?? [];
       // Rebuild including goal overlays
       const tempWorld: World = {
         ...world,

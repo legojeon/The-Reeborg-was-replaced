@@ -1,0 +1,41 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+.app-root {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  grid-template-rows: 100%;
+  height: 100%;
+}
+
+.viewport-wrap {
+  background: #ffffff;
+  position: relative;
+}
+
+.side-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  border-left: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #111827;
+  min-height: 0; /* allow child to shrink within grid */
+}
+
+button {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f3f4f6;
+}
+
+

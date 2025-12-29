@@ -1,0 +1,165 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "carrot": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 71,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "description": [
+    "리봇!<br>",
+    "모든 당근을 수집하세요.<br> ",
+    "당근은 계단에 0개, 1개 또는 2개, 랜덤하게 자라납니다.<br><br> ",
+    "우리는 항상 당신의 노고에 감사드립니다. <br>"
+  ],
+  "small_tiles": false,
+  "rows": 7,
+  "cols": 10,
+  "onload": [
+    "var staircase, choice, xpos;",
+    "for (staircase=1; staircase<=4; staircase++) {",
+    "    // first staircase",
+    "    if (staircase == 1) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(3, 4);",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', xpos, 2, {'number': cnt});",
+    "        }",
+    "        if (choice == 2) {",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 3, 2, {'number': cnt});",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 4, 2, {'number': cnt});",
+    "        }",
+    "    }",
+    "    // second staircase",
+    "    if (staircase == 2) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(5, 6);",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', xpos, 3, {'number': cnt});",
+    "        }",
+    "        if (choice == 2) {",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 5, 3, {'number': cnt});",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 6, 3, {'number': cnt});",
+    "        }",
+    "    }",
+    "    // third staircase",
+    "    if (staircase == 3) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(7, 8);",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', xpos, 4, {'number': cnt});",
+    "        }",
+    "        if (choice == 2) {",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 7, 4, {'number': cnt});",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 8, 4, {'number': cnt});",
+    "        }",
+    "    }",
+    "    // fourth staircase",
+    "    if (staircase == 4) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(9, 10);",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', xpos, 5, {'number': cnt});",
+    "        }",
+    "        if (choice == 2) {",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 9, 5, {'number': cnt});",
+    "            cnt = RUR.randint(0, 2);",
+    "            RUR.add_object('carrot', 10, 5, {'number': cnt});",
+    "        }",
+    "    }",
+    "}"
+  ],
+  "walls": {
+    "2,1": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "4,2": [
+      "east"
+    ],
+    "5,2": [
+      "north"
+    ],
+    "6,2": [
+      "north"
+    ],
+    "6,3": [
+      "east"
+    ],
+    "7,3": [
+      "north"
+    ],
+    "8,3": [
+      "north"
+    ],
+    "8,4": [
+      "east"
+    ],
+    "9,4": [
+      "north"
+    ],
+    "10,4": [
+      "north"
+    ]
+  },
+  "objects": {
+    "3,2": {},
+    "5,3": {
+      "carrot": 2
+    },
+    "7,4": {
+      "carrot": 2
+    },
+    "8,4": {
+      "carrot": 1
+    },
+    "9,5": {
+      "carrot": 1
+    },
+    "10,5": {
+      "carrot": 1
+    },
+    "4,2": {},
+    "6,3": {
+      "carrot": 2
+    }
+  },
+  "blockly": "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><variables></variables></xml>",
+  "editor": [
+    ""
+  ]
+}

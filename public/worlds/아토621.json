@@ -1,0 +1,110 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 10,
+      "objects": {
+        "token": 100
+      },
+      "model": "classic",
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_prev_x": 1,
+      "_prev_y": 10,
+      "_prev_orientation": 0,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 369,
+      "possible_initial_positions": [
+        [
+          1,
+          10
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "1,9": [
+      "north",
+      "east"
+    ],
+    "1,8": [
+      "east"
+    ],
+    "1,7": [
+      "east"
+    ],
+    "1,6": [
+      "east"
+    ],
+    "1,5": [
+      "east"
+    ],
+    "1,4": [
+      "east"
+    ],
+    "1,3": [
+      "east"
+    ],
+    "1,2": [
+      "east"
+    ],
+    "2,1": [
+      "north"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "6,1": [
+      "north"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "8,1": [
+      "north"
+    ],
+    "9,1": [
+      "north"
+    ],
+    "10,1": [
+      "north"
+    ]
+  },
+  "description": [
+    "<맵: 아토621S>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "objects": {
+    "3,2": {
+      "token": 1
+    },
+    "4,2": {
+      "token": 4
+    },
+    "5,2": {
+      "token": 7
+    },
+    "6,2": {
+      "token": 2
+    },
+    "7,2": {
+      "token": 5
+    },
+    "8,2": {
+      "token": 6
+    },
+    "9,2": {
+      "token": 3
+    }
+  }
+}

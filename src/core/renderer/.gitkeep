@@ -1,0 +1,7 @@
+Renderer: three.js scene management and world sync.
+Responsibilities:
+- Create and manage a Scene, Camera, Lights
+- Build grid tiles and a cube robot
+- Sync mesh transforms from world state
+Strictly no rule validation or game logic.
+

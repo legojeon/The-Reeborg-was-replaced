@@ -1,0 +1,57 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 105,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "description": [
+    "<맵: 아토141S>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "walls": {
+    "4,1": [
+      "north"
+    ],
+    "2,2": [
+      "east"
+    ],
+    "2,3": [
+      "east"
+    ],
+    "3,3": [
+      "north"
+    ],
+    "4,3": [
+      "north",
+      "east"
+    ],
+    "4,2": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ]
+  }
+}

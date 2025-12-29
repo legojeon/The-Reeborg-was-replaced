@@ -1,0 +1,279 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 2,
+      "objects": {
+        "token": 7
+      },
+      "model": "classic",
+      "_orientation": 1,
+      "_is_leaky": true,
+      "_prev_x": 1,
+      "_prev_y": 2,
+      "_prev_orientation": 1,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 23,
+      "initial_position": [
+        1,
+        2
+      ],
+      "possible_initial_positions": [
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "1,7": [
+      "east"
+    ],
+    "2,7": [
+      "north"
+    ],
+    "1,6": [
+      "east"
+    ],
+    "1,2": [
+      "east"
+    ],
+    "2,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "6,1": [
+      "north"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "7,2": [
+      "east"
+    ],
+    "7,3": [
+      "east"
+    ],
+    "7,4": [
+      "east"
+    ],
+    "7,6": [
+      "east"
+    ],
+    "7,7": [
+      "east",
+      "north"
+    ],
+    "6,7": [
+      "north"
+    ],
+    "5,7": [
+      "north"
+    ],
+    "3,7": [
+      "north"
+    ],
+    "1,5": [
+      "east"
+    ],
+    "1,4": [
+      "east"
+    ],
+    "1,3": [
+      "east"
+    ],
+    "4,7": [
+      "north"
+    ],
+    "7,5": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ]
+  },
+  "small_tiles": false,
+  "rows": 8,
+  "cols": 8,
+  "objects": {
+    "1,1": {
+      "token": 1
+    }
+  },
+  "tiles": {
+    "2,6": [
+      "mud"
+    ],
+    "2,7": [
+      "mud"
+    ],
+    "3,7": [
+      "mud"
+    ],
+    "4,7": [
+      "mud"
+    ],
+    "5,7": [
+      "mud"
+    ],
+    "6,7": [
+      "mud"
+    ],
+    "7,7": [
+      "mud"
+    ],
+    "7,6": [
+      "mud"
+    ],
+    "7,5": [
+      "mud"
+    ],
+    "7,4": [
+      "mud"
+    ],
+    "7,3": [
+      "mud"
+    ],
+    "7,2": [
+      "mud"
+    ],
+    "6,2": [
+      "mud"
+    ],
+    "5,2": [
+      "mud"
+    ],
+    "4,2": [
+      "mud"
+    ],
+    "3,2": [
+      "mud"
+    ],
+    "2,2": [
+      "mud"
+    ],
+    "2,3": [
+      "mud"
+    ],
+    "2,4": [
+      "mud"
+    ],
+    "2,5": [
+      "mud"
+    ],
+    "3,6": [
+      "grass"
+    ],
+    "4,6": [
+      "grass"
+    ],
+    "5,6": [
+      "grass"
+    ],
+    "6,6": [
+      "grass"
+    ],
+    "6,5": [
+      "grass"
+    ],
+    "6,4": [
+      "grass"
+    ],
+    "6,3": [
+      "grass"
+    ],
+    "5,3": [
+      "grass"
+    ],
+    "4,3": [
+      "grass"
+    ],
+    "3,3": [
+      "grass"
+    ],
+    "3,4": [
+      "grass"
+    ],
+    "3,5": [
+      "grass"
+    ],
+    "4,5": [
+      "grass"
+    ],
+    "5,5": [
+      "grass"
+    ],
+    "5,4": [
+      "grass"
+    ],
+    "4,4": [
+      "grass"
+    ]
+  },
+  "decorative_objects": {
+    "4,5": [
+      "dandelion"
+    ],
+    "5,5": [
+      "dandelion"
+    ],
+    "5,4": [
+      "dandelion"
+    ],
+    "4,4": [
+      "dandelion"
+    ]
+  },
+  "goal": {
+    "walls": {
+    }
+  },
+  "description": [
+    "<맵: 아토271>"
+  ],
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "}",
+    "",
+    "let nums = [3,4,5,6,7];",
+    "//east",
+    "nums = shuffle(nums);",
+    "RUR.remove_wall('east', 1, nums[0]);",
+    "RUR.remove_wall('east', 1, nums[1]);",
+    "//RUR.add_wall('east', 1, nums[0], {'goal': true});",
+    "//RUR.add_wall('east', 1, nums[1], {'goal': true});",
+    "",
+    "//west",
+    "nums = shuffle(nums);",
+    "RUR.remove_wall('west', 8, nums[0]);",
+    "//RUR.add_wall('west', 8, nums[0], {'goal': true});",
+    "",
+    "// south",
+    "nums = shuffle(nums);",
+    "RUR.remove_wall('north', nums[0], 1);",
+    "RUR.remove_wall('north', nums[1], 1);",
+    "//RUR.add_wall('north', nums[0], 1, {'goal': true});",
+    "//RUR.add_wall('north', nums[1], 1, {'goal': true});",
+    "",
+    "// north ",
+    "nums = shuffle(nums);",
+    "RUR.remove_wall('south', nums[0], 8);",
+    "RUR.remove_wall('south', nums[1], 8);",
+    "//RUR.add_wall('south', nums[0], 8, {'goal': true});",
+    "//RUR.add_wall('south', nums[1], 8, {'goal': true});",
+    "",
+    ""
+  ]
+}

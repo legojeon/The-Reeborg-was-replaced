@@ -1,0 +1,56 @@
+{
+    "robots": [
+      {
+        "x": 1,
+        "y": 1,
+        "_prev_x": 1,
+        "_prev_y": 1,
+        "_prev_orientation": 0,
+        "objects": {},
+        "_orientation": 0,
+        "_is_leaky": true,
+        "_trace_history": [],
+        "_trace_style": "default",
+        "_trace_color": "seagreen",
+        "__id": 98,
+        "model": "classic",
+        "possible_initial_positions": [
+          [
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "walls": {},
+    "description": [
+      "<h1>바나나 수확하기</h1>",
+      "리봇! 바나나 밭에서 바나나 수확을 도와주세요.<br>",
+      "수확해야하는 바나나는 5개이상씩 열린 바나나입니다.<br> ",
+      "5개보다 적게 열린 바나나는 제자리에 두세요. <br>",
+      "5개이상 열린 바나나는 전부 수확해서, 창고에 넣어주세요.<br><br>",
+      "",
+      "변수를 여러 개 사용해야할 수도 있습니다. <br>"
+    ],
+    "small_tiles": false,
+    "rows": 4,
+    "cols": 10,
+    "onload": [
+        "",
+        "farm = []",
+        "for (var i=0; i<8; i++) {",
+        "    farm.push(Math.floor(Math.random()*10) +1 );",
+        "}",
+        "",
+        "var sum = 0;",
+        "farm.forEach( function( item, index) {",
+        "    var x = index + 2;",
+        "    RUR.add_object('banana', x, 1, {'number': item }); ",
+        "    if( item >= 5){",
+        "        sum += item;",
+        "    }",
+        "});",
+        "",
+        "RUR.add_object('banana', 10, 1, {'number': sum, 'goal':true }); "
+    ]
+  }

@@ -1,0 +1,441 @@
+{
+  "description": [
+    "<h1>건강한 사과나무의 수과만 수확하고 창고에 저장하기</h1>",
+    "<p>리봇은 여러 개의 농장에서 사과를 수확해야 합니다.</p>",
+    "<p>사과나무중 사과가 3개이상 열린 사과만 모두 추수하세요. </p>",
+    "<p>수확한 사과는 창고에 모두 저장해 주세요.  </p>",    
+    "DIFFICULTY3"
+  ],
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 58,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "objects": {}
+    }
+  ],
+  "walls": {
+    "10,1": [
+      "east"
+    ],
+    "10,2": [
+      "east"
+    ],
+    "10,3": [
+      "east"
+    ],
+    "10,4": [
+      "east"
+    ],
+    "10,5": [
+      "east"
+    ],
+    "10,6": [
+      "east"
+    ],
+    "10,7": [
+      "east"
+    ],
+    "10,8": [
+      "east"
+    ],
+    "10,9": [
+      "east"
+    ],
+    "10,10": [
+      "east",
+      "north"
+    ],
+    "9,10": [
+      "north"
+    ],
+    "8,10": [
+      "north"
+    ],
+    "7,10": [
+      "north"
+    ],
+    "6,10": [
+      "north"
+    ],
+    "5,10": [
+      "north"
+    ],
+    "4,10": [
+      "north"
+    ],
+    "3,10": [
+      "north"
+    ],
+    "2,10": [
+      "north"
+    ],
+    "1,10": [
+      "north"
+    ]
+  },
+  "goal": {
+    "objects": {
+      "1,10": {
+        "apple": "all"
+      }
+    },
+    "possible_final_positions": [
+      [
+        1,
+        10
+      ]
+    ],
+    "position": {
+      "image": "racing_flag",
+      "x": 1,
+      "y": 10
+    }
+  },
+  "objects": {
+
+  },
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "tiles": {
+    "1,1": [
+      "grass"
+    ],
+    "1,2": [
+      "grass"
+    ],
+    "1,3": [
+      "grass"
+    ],
+    "1,4": [
+      "grass"
+    ],
+    "1,5": [
+      "grass"
+    ],
+    "1,6": [
+      "grass"
+    ],
+    "1,7": [
+      "grass"
+    ],
+    "1,8": [
+      "grass"
+    ],
+    "1,9": [
+      "grass"
+    ],
+    "1,10": [
+      "grass"
+    ],
+    "2,1": [
+      "grass"
+    ],
+    "2,2": [
+      "grass"
+    ],
+    "2,3": [
+      "grass"
+    ],
+    "2,4": [
+      "grass"
+    ],
+    "2,5": [
+      "grass"
+    ],
+    "2,6": [
+      "grass"
+    ],
+    "2,7": [
+      "grass"
+    ],
+    "2,8": [
+      "grass"
+    ],
+    "2,9": [
+      "grass"
+    ],
+    "2,10": [
+      "grass"
+    ],
+    "3,1": [
+      "grass"
+    ],
+    "3,2": [
+      "grass"
+    ],
+    "3,3": [
+      "pale_grass"
+    ],
+    "3,4": [
+      "pale_grass"
+    ],
+    "3,5": [
+      "pale_grass"
+    ],
+    "3,6": [
+      "pale_grass"
+    ],
+    "3,7": [
+      "pale_grass"
+    ],
+    "3,8": [
+      "pale_grass"
+    ],
+    "3,9": [
+      "grass"
+    ],
+    "3,10": [
+      "grass"
+    ],
+    "4,1": [
+      "grass"
+    ],
+    "4,2": [
+      "grass"
+    ],
+    "4,3": [
+      "pale_grass"
+    ],
+    "4,4": [
+      "pale_grass"
+    ],
+    "4,5": [
+      "pale_grass"
+    ],
+    "4,6": [
+      "pale_grass"
+    ],
+    "4,7": [
+      "pale_grass"
+    ],
+    "4,8": [
+      "pale_grass"
+    ],
+    "4,9": [
+      "grass"
+    ],
+    "4,10": [
+      "grass"
+    ],
+    "5,1": [
+      "grass"
+    ],
+    "5,2": [
+      "grass"
+    ],
+    "5,3": [
+      "pale_grass"
+    ],
+    "5,4": [
+      "pale_grass"
+    ],
+    "5,5": [
+      "pale_grass"
+    ],
+    "5,6": [
+      "pale_grass"
+    ],
+    "5,7": [
+      "pale_grass"
+    ],
+    "5,8": [
+      "pale_grass"
+    ],
+    "5,9": [
+      "grass"
+    ],
+    "5,10": [
+      "grass"
+    ],
+    "6,1": [
+      "grass"
+    ],
+    "6,2": [
+      "grass"
+    ],
+    "6,3": [
+      "pale_grass"
+    ],
+    "6,4": [
+      "pale_grass"
+    ],
+    "6,5": [
+      "pale_grass"
+    ],
+    "6,6": [
+      "pale_grass"
+    ],
+    "6,7": [
+      "pale_grass"
+    ],
+    "6,8": [
+      "pale_grass"
+    ],
+    "6,9": [
+      "grass"
+    ],
+    "6,10": [
+      "grass"
+    ],
+    "7,1": [
+      "grass"
+    ],
+    "7,2": [
+      "grass"
+    ],
+    "7,3": [
+      "pale_grass"
+    ],
+    "7,4": [
+      "pale_grass"
+    ],
+    "7,5": [
+      "pale_grass"
+    ],
+    "7,6": [
+      "pale_grass"
+    ],
+    "7,7": [
+      "pale_grass"
+    ],
+    "7,8": [
+      "pale_grass"
+    ],
+    "7,9": [
+      "grass"
+    ],
+    "7,10": [
+      "grass"
+    ],
+    "8,1": [
+      "grass"
+    ],
+    "8,2": [
+      "grass"
+    ],
+    "8,3": [
+      "pale_grass"
+    ],
+    "8,4": [
+      "pale_grass"
+    ],
+    "8,5": [
+      "pale_grass"
+    ],
+    "8,6": [
+      "pale_grass"
+    ],
+    "8,7": [
+      "pale_grass"
+    ],
+    "8,8": [
+      "pale_grass"
+    ],
+    "8,9": [
+      "grass"
+    ],
+    "8,10": [
+      "grass"
+    ],
+    "9,1": [
+      "grass"
+    ],
+    "9,2": [
+      "grass"
+    ],
+    "9,3": [
+      "grass"
+    ],
+    "9,4": [
+      "grass"
+    ],
+    "9,5": [
+      "grass"
+    ],
+    "9,6": [
+      "grass"
+    ],
+    "9,7": [
+      "grass"
+    ],
+    "9,8": [
+      "grass"
+    ],
+    "9,9": [
+      "grass"
+    ],
+    "9,10": [
+      "grass"
+    ],
+    "10,1": [
+      "grass"
+    ],
+    "10,2": [
+      "grass"
+    ],
+    "10,3": [
+      "grass"
+    ],
+    "10,4": [
+      "grass"
+    ],
+    "10,5": [
+      "grass"
+    ],
+    "10,6": [
+      "grass"
+    ],
+    "10,7": [
+      "grass"
+    ],
+    "10,8": [
+      "grass"
+    ],
+    "10,9": [
+      "grass"
+    ],
+    "10,10": [
+      "grass"
+    ]
+  },
+  "onload": [
+    "var matrix = []",
+    "",
+    "function shuffle(array) {",
+    "  return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "",
+    "// 36개의 0 또는 1을 랜덤으로 채우기 ",
+    "for (var i = 0; i < 33; i++) {",
+    "    matrix.push(RUR.randint(1, 2));",
+    "}",
+    "matrix.push(5);",
+    "matrix.push(10);",
+    "matrix.push(15);",
+    "matrix = shuffle(matrix);",
+    "",
+    "// 1이 있는 위치에만 당근을 추가하기",
+    "matrix.forEach( function(item, index) {",
+    "        var x = index % 6 +3;",
+    "        var y = parseInt(index / 6 + 3);",
+    "        RUR.add_object('apple', x, y, {'number': item});",
+    "});"
+  ]
+}

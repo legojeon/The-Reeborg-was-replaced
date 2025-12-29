@@ -1,0 +1,44 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {},
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 9,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "description": [
+    "모든 당근을 수집하세요."
+  ],
+  "small_tiles": false,
+  "rows": 4,
+  "cols": 10,
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "};",
+    "",
+    "let cnt = randint(100, 200);",
+    "RUR.add_object('carrot', 5, 1, {'number': cnt});"
+  ]
+}

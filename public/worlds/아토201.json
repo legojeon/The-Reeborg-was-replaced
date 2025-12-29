@@ -1,0 +1,62 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "carrot": 0
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 130,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "goal": {
+    "objects": {
+    },
+    "possible_final_positions": [
+      [
+        10,
+        1
+      ]
+    ],
+    "position": {
+      "image": "house",
+      "x": 10,
+      "y": 1
+    }
+  },
+  "description": [
+    "리봇!<br>",
+    "밭에 당근이 흩어져 있습니다.<br>",
+    "당근을 수집해 주세요!<br><br>",
+    "우리는 당신의 노고에 항상 감사드립니다."
+  ],
+  "small_tiles": false,
+  "rows": 2,
+  "cols": 10,
+  "onload": [
+    "var n, choice;",
+    "for (n=2; n<10; n++) {",
+    "    choice = RUR.randint(0, 1)",
+    "    if (choice == 0) {continue;}",
+    "    if (choice == 1) {",
+    "        RUR.add_object('carrot', n, 1, {'number': 1});",
+    "    }",
+    "}"
+  ]
+}

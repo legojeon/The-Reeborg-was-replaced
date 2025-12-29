@@ -1,0 +1,11 @@
+{
+  "rows": 10,
+  "cols": 10,
+  "description": "기본 10x10 월드",
+  "robots": [
+    { "x": 1, "y": 1, "orientation": "E", "objects": { "token": 0 } }
+  ],
+  "walls": {},
+  "objects": {}
+}
+

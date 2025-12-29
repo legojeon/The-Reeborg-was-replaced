@@ -1,0 +1,114 @@
+{
+    "robots": [
+        {
+            "x": 1,
+            "y": 1,
+            "_prev_x": 1,
+            "_prev_y": 1,
+            "_prev_orientation": 0,
+            "objects": {},
+            "_orientation": 0,
+            "_is_leaky": true,
+            "_trace_history": [],
+            "_trace_style": "default",
+            "_trace_color": "seagreen",
+            "__id": 3,
+            "model": "classic",
+            "possible_initial_positions": [
+                [
+                    1,
+                    1
+                ]
+            ]
+        }
+    ],
+    "walls": {
+        "1,1": [
+            "north"
+        ],
+        "2,1": [
+            "north"
+        ],
+        "2,2": [
+            "east"
+        ],
+        "3,2": [
+            "north",
+            "east"
+        ],
+        "4,2": [
+            "north",
+            "east"
+        ],
+        "5,2": [
+            "north",
+            "east"
+        ],
+        "6,2": [
+            "north",
+            "east"
+        ],
+        "7,2": [
+            "north",
+            "east"
+        ],
+        "8,2": [
+            "north",
+            "east"
+        ],
+        "9,2": [
+            "north",
+            "east"
+        ],
+        "10,1": [
+            "north"
+        ]
+    },
+    "description": [
+        "<h1>같은 당근을 찾아라!</h1>",
+        "리봇!<br>",
+        "이번에는 무작위로 당근을 놓아보겠습니다.<br>",
+        "바로 앞에 있는 당근의 갯수에 맞는 창고를 찾아 들어가세요.<br>",
+        "그리고 그 창고에 있는 당근을 모두 가져오세요.<br>",
+        "당근의 갯수는 1에서 7까지 무작위로 정해집니다.<br>",
+        "당근의 갯수를 알아내는 방법은 무엇일까요?<br>"
+    ],
+    "small_tiles": false,
+    "rows": 4,
+    "cols": 10,
+    "objects": {
+        "3,2": {
+            "carrot": 1
+        },
+        "4,2": {
+            "carrot": 2
+        },
+        "5,2": {
+            "carrot": 3
+        },
+        "6,2": {
+            "carrot": 4
+        },
+        "7,2": {
+            "carrot": 5
+        },
+        "8,2": {
+            "carrot": 6
+        },
+        "9,2": {
+            "carrot": 7
+        },
+        "2,1": {
+            "carrot": 4
+        }
+    },
+    "post": [
+        "",
+        ""
+    ],
+    "onload": [
+        "",
+        "var cnt = RUR.randint(1, 7);",
+        "RUR.add_object('carrot', 2, 1, {'number': cnt});"
+    ]
+}

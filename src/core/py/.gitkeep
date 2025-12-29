@@ -1,0 +1,7 @@
+Pyodide bridge: expose JS API to Python user code.
+Responsibilities:
+- Initialize/load Pyodide
+- Register move()/turn_left() that enqueue actions only
+- No world mutation from Python
+Consider web worker later (not in MVP).
+

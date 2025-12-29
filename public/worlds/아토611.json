@@ -1,0 +1,34 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 5,
+      "model": "classic"
+    }
+  ],
+  "walls": {},
+  "description": [
+    "<맵: 아토611>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "onload": [
+    "var x, y, width, height;",
+    "width = RUR.randint(5, 15);",
+    "height = 7;",
+    "RUR.set_world_size(width, height);"
+  ]
+}

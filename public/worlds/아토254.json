@@ -1,0 +1,89 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 2,
+      "_prev_x": 1,
+      "_prev_y": 2,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 84,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "1,1": [
+      "north"
+    ],
+    "2,1": [
+      "north"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "6,1": [
+      "north"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "8,1": [
+      "north"
+    ],
+    "9,1": [
+      "north"
+    ],
+    "10,1": [
+      "north"
+    ],
+    "11,1": [
+      "north"
+    ],
+    "12,1": [
+      "north"
+    ]
+  },
+  "goal": {},
+  "description": [
+    "<h1>빙판 위에 벽을 세우기</h1>",
+    "리봇!<br>",
+    "이번에는 빙판 위에 벽을 세워야 합니다.<br>",
+    "빙판 위에 벽을 세우려면, 벽을 세우고자 하는 위치에 빙판쪽으로 방향을 바꾼 다음에 벽을 세우면 됩니다.<br>",
+    "명령어는 build_wall() 입니다.<br><br>",
+    "<h4>우리는 항상 리봇의 기술력에 감탄과 존경을 표합니다.</h4>",
+    ""
+  ],
+  "small_tiles": false,
+  "rows": 5,
+  "cols": 12,
+  "onload": [
+    "var xpos, choice;",
+    "for (xpos=2; xpos<=11; xpos++) {",
+    "    choice = RUR.randint(0, 1);",
+    "    if (choice == 0) {",
+    "        RUR.remove_wall('north', xpos, 1);",
+    "        RUR.add_wall('north', xpos, 1, {'goal': true});",    
+    "        RUR.add_background_tile('ice', xpos, 1);",
+    "    }",
+    "}"
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 327,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "5,6": [
+      "north"
+    ],
+    "5,5": [
+      "north"
+    ],
+    "5,4": [
+      "north"
+    ],
+    "5,3": [
+      "north"
+    ],
+    "5,2": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ]
+  },
+  "description": [
+    "<맵: 아토551>"
+  ],
+  "small_tiles": false,
+  "rows": 7,
+  "cols": 5,
+  "onload": [
+    "var first, second, third;",
+    "while (true) {",
+    "    first = RUR.randint(1, 7);",
+    "    second = RUR.randint(1, 7);",
+    "    third = RUR.randint(1, 7);",
+    "    if (first != second && second != third && third != first) {break;}",
+    "}",
+    "var arr = [first, second, third];",
+    "arr.sort(function (a, b) {",
+    "    return a - b;",
+    "})",
+    "RUR.add_object('token', 2, 1, {'number': arr[0]});",
+    "RUR.add_object('token', 3, 1, {'number': arr[1]});",
+    "RUR.add_object('token', 4, 1, {'number': arr[2]});"
+  ],
+  "objects": {
+    "5,1": {
+      "token": 1
+    },
+    "5,2": {
+      "token": 2
+    },
+    "5,3": {
+      "token": 3
+    },
+    "5,4": {
+      "token": 4
+    },
+    "5,5": {
+      "token": 5
+    },
+    "5,6": {
+      "token": 6
+    },
+    "5,7": {
+      "token": 7
+    }
+  }
+}

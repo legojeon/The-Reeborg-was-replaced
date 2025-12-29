@@ -1,0 +1,54 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {},
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 13,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "description": [
+    "<h1>두 그루 사과나무 수확</h1>",
+    "<p>사과나무 두 그루가 있습니다. 두 그루의 사과를 모두 가져오세요.</p>",
+    "<p>수확한 사고는 창고에 모두 보관합니다.",
+    ""
+  ],
+  "small_tiles": false,
+  "rows": 4,
+  "cols": 10,
+  "objects": {
+    "3,1": {
+      "apple": "1-19"
+    },
+    "6,1": {
+      "apple": "1-19"
+    }
+  },
+  "goal": {
+    "objects": {
+      "10,1": {
+        "apple": "all"
+      }
+    }
+  },
+  "onload": [
+    "",
+    ""
+  ]
+}

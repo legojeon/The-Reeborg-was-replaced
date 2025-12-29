@@ -1,0 +1,69 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 98,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "description": [
+    "<맵: 아토111S>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "walls": {
+    "2,2": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "5,2": [
+      "east"
+    ],
+    "5,4": [
+      "east"
+    ],
+    "2,4": [
+      "east"
+    ],
+    "5,5": [
+      "east"
+    ],
+    "5,7": [
+      "east",
+      "north"
+    ],
+    "3,7": [
+      "north"
+    ],
+    "2,7": [
+      "east"
+    ],
+    "2,5": [
+      "east"
+    ]
+  }
+}

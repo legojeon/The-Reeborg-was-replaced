@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { World } from '../types/types';
 import { mapX1BasedToScene, mapZ1BasedToScene } from './utils';
+import { WALL_COLORS, GOAL_COLORS } from './colors';
 
 export function createWalls(world: World): { group: InstanceType<typeof Group>, dispose: () => void } {
   const group = new Group();
@@ -13,8 +14,8 @@ export function createWalls(world: World): { group: InstanceType<typeof Group>, 
   const wallHeight = 0.5;
   const wallY = wallHeight / 2;
   const wallThickness = 0.06;
-  const wallMat = new MeshStandardMaterial({ color: 0x94a3b8 });
-  const wallMatGoal = new MeshStandardMaterial({ color: 0xfca5a5 });
+  const wallMat = new MeshStandardMaterial({ color: WALL_COLORS.primitive });
+  const wallMatGoal = new MeshStandardMaterial({ color: GOAL_COLORS.overlay });
   // Target dimensions for GLB walls (real walls only)
   const GLB_TARGET_LENGTH = 1.2;          // along local X
   const GLB_TARGET_HEIGHT = 1.2;        // a bit taller than legacy 0.5
@@ -127,7 +128,7 @@ export function createWalls(world: World): { group: InstanceType<typeof Group>, 
           glbClones.push(clone as any);
         }
         // Add GLB goal walls tinted red
-        const GOAL_COLOR = 0xfca5a5;
+        const GOAL_COLOR = GOAL_COLORS.overlay;
         for (const gw of goalWallsPlacements) {
           const cx = mapX1BasedToScene(gw.x);
           const cz = mapZ1BasedToScene(gw.y, world.height);

@@ -9,10 +9,11 @@ import { createGround } from './ground';
 import { createWalls, createWallsFromList } from './walls';
 import { createObjects, createObjectsFromList } from './objects';
 import type { SceneHandle } from './types';
+import { SCENE_COLORS, LIGHT_COLORS, GOAL_COLORS, ROBOT_COLORS } from './colors';
 
 export function createThreeScene(canvas: HTMLCanvasElement, world: World): SceneHandle {
   const scene = new Scene();
-  scene.background = new Color('#ffffff');
+  scene.background = new Color(SCENE_COLORS.background as any);
 
   const camera = new PerspectiveCamera(50, 1, 0.1, 1000);
   const center = new Vector3((world.width - 1) / 2, 0, (world.height - 1) / 2);
@@ -31,10 +32,10 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
     (renderer as any).outputColorSpace = SRGBColorSpace;
   }
 
-  const amb = new AmbientLight(0xffffff, 0.6);
-  const dir = new DirectionalLight(0xffffff, 0.8);
+  const amb = new AmbientLight(LIGHT_COLORS.ambient, 0.6);
+  const dir = new DirectionalLight(LIGHT_COLORS.directional, 0.8);
   dir.position.set(5, 10, 7);
-  const hemi = new HemisphereLight(0xffffff, 0x404040, 0.5);
+  const hemi = new HemisphereLight(LIGHT_COLORS.hemiSky, LIGHT_COLORS.hemiGround, 0.5);
   scene.add(amb, dir, hemi);
 
   // Mouse camera controls
@@ -65,7 +66,7 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
     const gy = Number(gp?.y);
     if (Number.isFinite(gx) && Number.isFinite(gy)) {
       goalOverlayGeom = new PlaneGeometry(1, 1, 1, 1);
-      goalOverlayMat = new MeshStandardMaterial({ color: 0x86efac, transparent: true, opacity: 0.6 });
+      goalOverlayMat = new MeshStandardMaterial({ color: GOAL_COLORS.positionTile, transparent: true, opacity: 0.6 });
       goalOverlay = new Mesh(goalOverlayGeom, goalOverlayMat);
       goalOverlay.rotation.x = -Math.PI / 2;
       goalOverlay.position.set(mapX1BasedToScene(Math.floor(gx)), -0.0005, mapZ1BasedToScene(Math.floor(gy), world.height));
@@ -85,7 +86,7 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
 
   // Robot: start with a simple primitive immediately, then swap to GLB when loaded
   const robotGeom = new CylinderGeometry(0.5, 0.5, 0.5, 3, 1, false); // triangular prism
-  const robotMat = new MeshStandardMaterial({ color: 0x3b82f6, flatShading: true }); // bright blue
+  const robotMat = new MeshStandardMaterial({ color: ROBOT_COLORS.default, flatShading: true }); // primitive color
   let robot: InstanceType<typeof Mesh> | InstanceType<typeof Group> = new Mesh(robotGeom, robotMat);
   let robotIsGLB = false;
   let disposeGLB: (() => void) | null = null;
@@ -107,19 +108,7 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
         model.rotation.copy((robot as any).rotation);
         // Heuristic scale so it roughly fits the previous primitive footprint
         model.scale.setScalar(GLB_SCALE);
-        // Ensure default color matches primitive's blue (0x3b82f6)
-        const defaultColor = new Color(0x3b82f6);
-        model.traverse((n: any) => {
-          if (n.isMesh && n.material) {
-            const mats = Array.isArray(n.material) ? n.material : [n.material];
-            for (const m of mats) {
-              if (m?.color) {
-                m.color = defaultColor.clone();
-                m.needsUpdate = true;
-              }
-            }
-          }
-        });
+        // Preserve GLB's original materials/colors (no overrides)
         // Swap in scene
         scene.remove(robot as any);
         scene.add(model);

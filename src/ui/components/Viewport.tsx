@@ -1,6 +1,7 @@
 import React from 'react';
 import { createThreeScene } from '../../core/renderer/scene';
 import type { World, RobotPose } from '../../core/types/types';
+import { ROBOT_COLORS } from '../../core/renderer/colors';
 
 interface Props {
   world: World;
@@ -40,9 +41,9 @@ export function Viewport({ world, robot, reverseTurn, objects, statusKind, walls
     const h = handleRef.current;
     if (!h) return;
     if (statusKind === 'error') {
-      h.setRobotColor('#ef4444'); // red-500
+      h.setRobotColor(ROBOT_COLORS.error);
     } else {
-      h.setRobotColor('#3b82f6'); // blue-500
+      h.setRobotColor(ROBOT_COLORS.running);
     }
   }, [statusKind]);
 

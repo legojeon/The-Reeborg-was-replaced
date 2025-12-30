@@ -4,6 +4,7 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import type { World } from '../types/types';
 import type { ObjectKind } from '../world/objectKinds';
 import { mapX1BasedToScene, mapZ1BasedToScene } from './utils';
+import { OBJECT_COLORS, GOAL_COLORS } from './colors';
 
 // Module-level GLB template cache to avoid reloading per update
 const OBJECT_LOADER = new GLTFLoader();
@@ -26,6 +27,16 @@ function loadTemplate(url: string): Promise<GLTF['scene']> {
   return TEMPLATE_CACHE.get(url)!;
 }
 
+// Per-kind target heights (scene units), used by both actual and goal objects
+const OBJECT_TARGET_HEIGHT_BY_KIND: Record<ObjectKind, number> = {
+  apple: 0.6,
+  banana: 0.5,
+  carrot: 0.8,
+  dandelion: 0.5,
+  leaf: 0.5,
+  token: 0.5
+};
+
 export function createObjectsFromList(height: number, list: NonNullable<World['objects']>): { group: InstanceType<typeof Group>, dispose: () => void } {
   const group = new Group();
   if (!list || list.length === 0) {
@@ -33,20 +44,18 @@ export function createObjectsFromList(height: number, list: NonNullable<World['o
   }
   // Placeholders shown until GLB loads
   const geom = new OctahedronGeometry(0.2, 0);
-  const matDefault = new MeshStandardMaterial({ color: 0xffa500 });
-  const matGoal = new MeshStandardMaterial({ color: 0xfca5a5 });
+  const matDefault = new MeshStandardMaterial({ color: OBJECT_COLORS.primitive });
+  const matGoal = new MeshStandardMaterial({ color: GOAL_COLORS.overlay });
   const sprites: InstanceType<typeof Sprite>[] = [];
   const textures: InstanceType<typeof CanvasTexture>[] = [];
   const primitiveMeshes: InstanceType<typeof Mesh>[] = [];
   const glbClones: InstanceType<typeof Group | typeof Mesh>[] = [];
   // cache loaded templates per kind
   const templateByKind = new Map<ObjectKind, { template: GLTF['scene'], scale: number }>();
-  // desired unified height for all objects (in scene units)
-  const TARGET_HEIGHT = 0.5;
   // brighten factor for all objects (applied via emissive)
   const BRIGHTEN_INTENSITY = 0.02;
   // vertical hover offset above ground for all objects
-  const OBJECT_FLOAT_Y = 0.2;
+  const OBJECT_FLOAT_Y = 0.1;
   // map kinds to asset URLs
   const KIND_TO_URL: Record<ObjectKind, string> = {
     apple: new URL('../../assets/objects/apple.glb', import.meta.url).href,
@@ -72,7 +81,7 @@ export function createObjectsFromList(height: number, list: NonNullable<World['o
     canvas.width = 128; canvas.height = 128;
     const ctx = canvas.getContext('2d')!;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ffa500';
+    ctx.fillStyle = OBJECT_COLORS.label;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = 'bold 64px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
@@ -95,13 +104,14 @@ export function createObjectsFromList(height: number, list: NonNullable<World['o
     loadTemplate(url)
       .then((template) => {
         try {
-          // compute uniform scale so model height becomes TARGET_HEIGHT
+          // compute uniform scale so model height becomes per-kind target height
           template.updateMatrixWorld(true);
           const box = new Box3().setFromObject(template);
           const size = new Vector3();
           box.getSize(size);
           const height = size.y > 0 ? size.y : 1;
-          const scale = TARGET_HEIGHT / height;
+          const targetHeight = OBJECT_TARGET_HEIGHT_BY_KIND[kind] ?? 0.5;
+          const scale = targetHeight / height;
           templateByKind.set(kind, { template, scale });
           // swap placeholders for this kind
           placements.forEach((p, idx) => {
@@ -219,16 +229,15 @@ export function createObjects(world: World): { group: InstanceType<typeof Group>
   const goalObjects = goal?.objects;
   if (goalObjects && typeof goalObjects === 'object') {
     const geom = new OctahedronGeometry(0.2, 0);
-    const matGoal = new MeshStandardMaterial({ color: 0xfca5a5 });
+    const matGoal = new MeshStandardMaterial({ color: GOAL_COLORS.overlay });
     const sprites: InstanceType<typeof Sprite>[] = [];
     const textures: InstanceType<typeof CanvasTexture>[] = [];
     const placeholders: InstanceType<typeof Mesh>[] = [];
     const goalClones: InstanceType<typeof Group | typeof Mesh>[] = [];
     const goalPlacements: Array<{ kind: string; cx: number; cz: number; placeholderIdx: number }> = [];
     const loader = new GLTFLoader();
-    // Desired unified height for goal GLBs (keep consistent with actual objects)
-    const GOAL_TARGET_HEIGHT = 0.5;
-    const GOAL_COLOR = 0x607083; // darker gray for goal objects
+    // Goal GLBs use the same per-kind target heights as actual objects
+    const GOAL_COLOR = GOAL_COLORS.objectGLB; // darker gray for goal objects
     const BRIGHTEN_INTENSITY_GOAL = 0.2; // no glow for goal objects
     const GOAL_OBJECT_FLOAT_Y = 0.2; // match actual objects' offset
     // map kinds to asset URLs
@@ -261,7 +270,7 @@ export function createObjects(world: World): { group: InstanceType<typeof Group>
         canvas.width = 128; canvas.height = 128;
         const ctx = canvas.getContext('2d')!;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fca5a5';
+        ctx.fillStyle = GOAL_COLORS.objectLabel;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.font = 'bold 64px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace';
@@ -294,7 +303,8 @@ export function createObjects(world: World): { group: InstanceType<typeof Group>
             const size = new Vector3();
             box.getSize(size);
             const height = size.y > 0 ? size.y : 1;
-            const scale = GOAL_TARGET_HEIGHT / height;
+            const targetHeight = OBJECT_TARGET_HEIGHT_BY_KIND[k as ObjectKind] ?? 0.5;
+            const scale = targetHeight / height;
             // create clones for each placement of kind k
             goalPlacements.forEach(({ kind, cx, cz, placeholderIdx }) => {
               if (kind !== k) return;

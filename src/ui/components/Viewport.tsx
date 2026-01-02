@@ -8,11 +8,12 @@ interface Props {
   robot: RobotPose;
   reverseTurn?: boolean;
   objects?: World['objects'];
+  status?: string;
   statusKind?: 'info' | 'running' | 'error';
   walls?: World['walls'];
 }
 
-export function Viewport({ world, robot, reverseTurn, objects, statusKind, walls }: Props) {
+export function Viewport({ world, robot, reverseTurn, objects, status, statusKind, walls }: Props) {
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
   const handleRef = React.useRef<ReturnType<typeof createThreeScene> | null>(null);
 
@@ -42,10 +43,15 @@ export function Viewport({ world, robot, reverseTurn, objects, statusKind, walls
     if (!h) return;
     if (statusKind === 'error') {
       h.setRobotColor(ROBOT_COLORS.error);
-    } else {
+    } else if (statusKind === 'running') {
       h.setRobotColor(ROBOT_COLORS.running);
+    } else {
+      // info or others: restore original GLB/primitive color
+      (h as any).restoreRobotOriginalColor?.();
     }
   }, [statusKind]);
+
+  // (explosion effect removed)
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>

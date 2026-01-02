@@ -109,6 +109,18 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
         // Heuristic scale so it roughly fits the previous primitive footprint
         model.scale.setScalar(GLB_SCALE);
         // Preserve GLB's original materials/colors (no overrides)
+        // Store originals so we can restore later after temporary overrides
+        model.traverse((n: any) => {
+          if (n.isMesh && n.material) {
+            const mats = Array.isArray(n.material) ? n.material : [n.material];
+            for (const m of mats) {
+              if (m?.color && !m.userData?.__origColor) {
+                m.userData = m.userData || {};
+                m.userData.__origColor = m.color.clone();
+              }
+            }
+          }
+        });
         // Swap in scene
         scene.remove(robot as any);
         scene.add(model);
@@ -200,7 +212,14 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', onPointerUp);
 
+  let prevNow = performance.now();
+
   renderer.setAnimationLoop(() => {
+    // delta seconds
+    const now = performance.now();
+    const delta = Math.max(0, (now - prevNow)) / 1000;
+    prevNow = now;
+
     if (viewMode === 'iso') {
       controls.update();
     }
@@ -390,6 +409,25 @@ export function createThreeScene(canvas: HTMLCanvasElement, world: World): Scene
       wallsGroup = rebuiltAll.group;
       disposeWalls = rebuiltAll.dispose;
       scene.add(wallsGroup);
+    },
+    restoreRobotOriginalColor() {
+      if (robotIsGLB) {
+        (robot as any).traverse((n: any) => {
+          if (n.isMesh && n.material) {
+            const mats = Array.isArray(n.material) ? n.material : [n.material];
+            for (const m of mats) {
+              const orig = m?.userData?.__origColor;
+              if (m?.color && orig) {
+                m.color.copy(orig);
+                m.needsUpdate = true;
+              }
+            }
+          }
+        });
+      } else {
+        robotMat.color = new Color(ROBOT_COLORS.default as any);
+        robotMat.needsUpdate = true;
+      }
     }
   };
 }

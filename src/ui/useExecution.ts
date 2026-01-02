@@ -106,11 +106,15 @@ export function useExecution(world: World, code: string) {
       const ev = engineRef.current.step();
       if (!ev) {
         clearRunTimer();
-        // Evaluate goal if present
+        // Evaluate goal if present; otherwise mark as 'done'
         try {
           const finalState = engineRef.current.getState();
-          const ok = evaluateGoal(finalState, finalState.goal);
-          setStatus(ok ? 'success' : 'fail');
+          if (!finalState.goal) {
+            setStatus('done');
+          } else {
+            const ok = evaluateGoal(finalState, finalState.goal);
+            setStatus(ok ? 'success' : 'fail');
+          }
           setStatusKind('info');
         } catch {
           setStatus(world.description ?? '자유롭게 움직여보세요.');

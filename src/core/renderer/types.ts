@@ -11,6 +11,7 @@ export interface SceneHandle {
   resetView(): void;
   setViewMode(mode: ViewMode): void;
   setRobotColor(color: number | string): void;
+  restoreRobotOriginalColor(): void;
 }
 
 

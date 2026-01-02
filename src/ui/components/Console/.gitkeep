@@ -1,5 +1,0 @@
-Console/log output.
-Responsibilities:
-- Display trace events and error messages
-- Keep a scrollable history, minimal filters later
-

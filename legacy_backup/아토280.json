@@ -1,0 +1,60 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "carrot": 0
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 15,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "goal": {
+  },
+  "walls": {},
+  "description": [
+    "A simple, empty world, ready for Reeborg to explore."
+  ],
+  "small_tiles": false,
+  "rows": 4,
+  "cols": 10,
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "};",
+    "",
+    "let bucket = [2, 3, 4, 5, 6, 7, 8, 9];",
+    "// cols에서 랜덤으로 4개 뽑기",
+    "bucket = shuffle(bucket).slice(0, 4);",
+    "let total = 0;",
+    "bucket.forEach(function(num) {",
+    "    var cnt = RUR.randint(1, 9);    ",
+    "    RUR.add_object('carrot', num, 1, {'number': cnt}) ;",
+    "    total += cnt;",
+    "});",
+    "",
+    "for(var x=2; x<10; x++) {",
+    "    RUR.add_object('carrot', 10, 1, {'goal': true, 'number': total });}",
+    ""
+  ],
+  "objects": {
+  }
+}

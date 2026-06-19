@@ -1,0 +1,47 @@
+{
+    "robots": [
+        {
+            "x": 1,
+            "y": 1,
+            "_prev_x": 1,
+            "_prev_y": 1,
+            "_prev_orientation": 0,
+            "objects": {},
+            "_orientation": 0,
+            "_is_leaky": true,
+            "_trace_history": [],
+            "_trace_style": "default",
+            "_trace_color": "seagreen",
+            "__id": 10,
+            "model": "classic",
+            "possible_initial_positions": [
+                [
+                    1,
+                    1
+                ]
+            ]
+        }
+    ],
+    "walls": {},
+    "description": [
+        "<h1>사과나무의 수확차이 알기</h1>",
+        "<p>앞쪽 사과나무에는 11에서 19개의 사과가 있고, 그 중에서 1에서 9개의 사과를 먹었습니다. 그러면 나머지 사과는 몇 개일까요?</p>",
+        "<p>사과나무에 있는 사과의 개수를 알아내는 프로그램을 작성해 봅시다.</p>",
+        "<p>창고에 남은 사과의 갯수만큼 쌓으면 됩니다. </p>"
+    ],
+    "small_tiles": false,
+    "rows": 4,
+    "cols": 10,
+    "objects": {},
+    "goal": {},
+    "onload": [
+        "",
+        "var num1 = RUR.randint(11, 19);",
+        "var num2 = RUR.randint(1, 9);",
+        "RUR.add_object('apple', 4, 1, {'number': num1});",
+        "RUR.add_object('apple', 5, 1, {'number': num2});",
+        "RUR.add_object('apple', 10, 1, {'goal': true, 'number': num1-num2});",
+        "",
+        ""
+    ]
+}

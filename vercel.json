@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/((?!worlds/|assets/).*)", "destination": "/index.html" }
+  ]
+}

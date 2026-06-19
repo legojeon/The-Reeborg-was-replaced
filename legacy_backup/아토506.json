@@ -1,0 +1,179 @@
+{
+    "robots": [
+      {
+        "x": 1,
+        "y": 1,
+        "_prev_x": 1,
+        "_prev_y": 1,
+        "_prev_orientation": 0,
+        "objects": {},
+        "_orientation": 0,
+        "_is_leaky": true,
+        "_trace_history": [],
+        "_trace_style": "default",
+        "_trace_color": "seagreen",
+        "__id": 3,
+        "model": "classic",
+        "possible_initial_positions": [
+          [
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "walls": {},
+    "description": [
+      "<h1>사과과수원의 사과 수확</h1>",
+      "사과과수원에 사과가 열립니다. 모든 사과의 수를 세어보세요.",
+      "사과과수원은 10x10 격자로 이루어져 있습니다. ",
+      "사과과수원의 모든 사과를 수확하려면 어떻게 해야 할까요?",
+      "창고에 모든 사과를 저장하셔야 합니다. "
+    ],
+    "small_tiles": false,
+    "rows": 10,
+    "cols": 10,
+    "tiles": {
+      "2,2": [
+        "bricks"
+      ],
+      "3,2": [
+        "bricks"
+      ],
+      "4,2": [
+        "bricks"
+      ],
+      "5,2": [
+        "bricks"
+      ],
+      "6,2": [
+        "bricks"
+      ],
+      "7,2": [
+        "bricks"
+      ],
+      "8,2": [
+        "bricks"
+      ],
+      "9,2": [
+        "bricks"
+      ],
+      "9,3": [
+        "bricks"
+      ],
+      "9,4": [
+        "bricks"
+      ],
+      "9,5": [
+        "bricks"
+      ],
+      "9,6": [
+        "bricks"
+      ],
+      "9,7": [
+        "bricks"
+      ],
+      "9,8": [
+        "bricks"
+      ],
+      "9,9": [
+        "bricks"
+      ],
+      "8,9": [
+        "bricks"
+      ],
+      "7,9": [
+        "bricks"
+      ],
+      "6,9": [
+        "bricks"
+      ],
+      "5,9": [
+        "bricks"
+      ],
+      "4,9": [
+        "bricks"
+      ],
+      "3,9": [
+        "bricks"
+      ],
+      "2,9": [
+        "bricks"
+      ],
+      "2,8": [
+        "bricks"
+      ],
+      "2,7": [
+        "bricks"
+      ],
+      "2,6": [
+        "bricks"
+      ],
+      "2,5": [
+        "bricks"
+      ],
+      "2,4": [
+        "bricks"
+      ],
+      "2,3": [
+        "bricks"
+      ]
+    },
+    "onload": [
+      "function shuffle(array) {",
+      "  return array.sort(() => Math.random() - 0.5);",
+      "}",
+      "",
+      "var apples = [];",
+      "for(var i=0; i<12; i++){",
+      "    apples.push( RUR.randint(1, 9) );",
+      "}",
+      "var total = 0",
+      "apples.forEach( function(item) {",
+      "   if( item>5) {",
+      "       total += item;",
+      "   }",
+      "});",
+      "",
+      "var pos = [2,3,4,5,6,7,8,9];",
+      "// south",
+      "pos = shuffle(pos);",
+      "RUR.add_object('apple', pos[0], 1, {'number': apples[0]});",
+      "RUR.add_object('apple', pos[1], 1, {'number': apples[1]});",
+      "RUR.add_object('apple', pos[2], 1, {'number': apples[2]});",
+      "// north",
+      "pos = shuffle(pos);",
+      "RUR.add_object('apple', pos[0], 10, {'number': apples[3]});",
+      "RUR.add_object('apple', pos[1], 10, {'number': apples[4]});",
+      "RUR.add_object('apple', pos[2], 10, {'number': apples[5]});",
+      "//east",
+      "pos = shuffle(pos);",
+      "RUR.add_object('apple', 10,pos[0], {'number': apples[6]});",
+      "RUR.add_object('apple', 10,pos[1], {'number': apples[7]});",
+      "RUR.add_object('apple', 10,pos[2], {'number': apples[8]});",
+      "//west",
+      "pos = shuffle(pos);",
+      "RUR.add_object('apple', 1,pos[0], {'number': apples[9]});",
+      "RUR.add_object('apple', 1,pos[1], {'number': apples[10]});",
+      "RUR.add_object('apple', 1,pos[2], {'number': apples[11]});",
+      "",
+      "// goal",
+      "// RUR.add_object('apple', 1, 1, {'goal': true, 'number': total});",
+      ""
+    ],
+    "objects": {
+    },
+    "goal": {
+      "possible_final_positions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "position": {
+        "image": "racing_flag",
+        "x": 1,
+        "y": 1
+      }
+    }
+  }

@@ -1,0 +1,330 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 2,
+      "objects": {
+        "token": 100
+      },
+      "model": "classic",
+      "_orientation": 1,
+      "_is_leaky": true,
+      "_prev_x": 1,
+      "_prev_y": 2,
+      "_prev_orientation": 1,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 108,
+      "possible_initial_positions": [
+        [
+          1,
+          2
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "1,7": [
+      "east"
+    ],
+    "2,7": [
+      "north"
+    ],
+    "1,6": [
+      "east"
+    ],
+    "1,5": [
+      "east"
+    ],
+    "1,4": [
+      "east"
+    ],
+    "1,3": [
+      "east"
+    ],
+    "1,2": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "2,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "6,1": [
+      "north"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "7,2": [
+      "east"
+    ],
+    "7,3": [
+      "east"
+    ],
+    "7,4": [
+      "east"
+    ],
+    "7,5": [
+      "east"
+    ],
+    "7,6": [
+      "east"
+    ],
+    "7,7": [
+      "east",
+      "north"
+    ],
+    "6,7": [
+      "north"
+    ],
+    "5,7": [
+      "north"
+    ],
+    "4,7": [
+      "north"
+    ],
+    "3,7": [
+      "north"
+    ]
+  },
+  "description": [
+    "<맵: 아토271>"
+  ],
+  "small_tiles": false,
+  "rows": 8,
+  "cols": 8,
+  "onload": [
+    "var side, choice, target1, target2;",
+    "function wall_flip(direction, x, y) {",
+    "    RUR.remove_wall(direction, x, y);",
+    "    RUR.add_wall(direction, x, y, {'goal': true} );",
+    "}",
+    "for (side=1; side<=4; side++) {",
+    "    // east side",
+    "    if (side == 1) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(3, 6);",
+    "            target2 = RUR.randint(3, 6);",
+    "            if (target1 != target2) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            //RUR.remove_wall('east', 7, target1);",
+    "            wall_flip('east', 7, target1);",
+    "        }",
+    "        if (choice == 2) {",
+    "            //RUR.remove_wall('east', 7, target1);",
+    "            //RUR.remove_wall('east', 7, target2);",
+    "            wall_flip('east', 7, target1);",
+    "            wall_flip('east', 7, target2);",
+    "        }",
+    "    }",
+    "    // west side",
+    "    if (side == 2) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(3, 6);",
+    "            target2 = RUR.randint(3, 6);",
+    "            if (target1 != target2) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            //RUR.remove_wall('west', 2, target1);",
+    "            wall_flip('west', 2, target1);",
+    "        }",
+    "        if (choice == 2) {",
+    "            //RUR.remove_wall('west', 2, target1);",
+    "            //RUR.remove_wall('west', 2, target2);",
+    "            wall_flip('west', 2, target1);",
+    "            wall_flip('west', 2, target2);",
+    "        }",
+    "    }",
+    "    // south side",
+    "    if (side == 3) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(3, 6);",
+    "            target2 = RUR.randint(3, 6);",
+    "            if (target1 != target2) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            //RUR.remove_wall('south', target1, 2);",
+    "            wall_flip('south', target1, 2);",
+    "        }",
+    "        if (choice == 2) {",
+    "            //RUR.remove_wall('south', target1, 2);",
+    "            //RUR.remove_wall('south', target2, 2);",
+    "            wall_flip('south', target1, 2);",
+    "            wall_flip('south', target2, 2);",
+    "        }",
+    "    }",
+    "    // north side",
+    "    if (side == 4) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(3, 6);",
+    "            target2 = RUR.randint(3, 6);",
+    "            if (target1 != target2) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            //RUR.remove_wall('north', target1, 7);",
+    "            wall_flip('north', target1, 7);",
+    "        }",
+    "        if (choice == 2) {",
+    "            //RUR.remove_wall('north', target1, 7);",
+    "            //RUR.remove_wall('north', target2, 7);",
+    "            wall_flip('north', target1, 7);",
+    "            wall_flip('north', target2, 7);",
+    "        }",
+    "    }",
+    "}"
+  ],
+  "objects": {
+    "1,1": {
+      "token": 1
+    }
+  },
+  "goal": {
+    "walls": {
+      "7,3": [
+        "east"
+      ],
+      "7,4": [
+        "east"
+      ],
+      "1,4": [
+        "east"
+      ],
+      "1,5": [
+        "east"
+      ],
+      "6,1": [
+        "north"
+      ],
+      "4,1": [
+        "north"
+      ],
+      "6,7": [
+        "north"
+      ]
+    }
+  },
+  "tiles": {
+    "2,7": [
+      "mud"
+    ],
+    "3,7": [
+      "mud"
+    ],
+    "4,7": [
+      "mud"
+    ],
+    "5,7": [
+      "mud"
+    ],
+    "6,7": [
+      "mud"
+    ],
+    "7,7": [
+      "mud"
+    ],
+    "7,6": [
+      "mud"
+    ],
+    "6,6": [
+      "water"
+    ],
+    "5,6": [
+      "water"
+    ],
+    "4,6": [
+      "water"
+    ],
+    "3,6": [
+      "water"
+    ],
+    "2,6": [
+      "mud"
+    ],
+    "2,5": [
+      "mud"
+    ],
+    "3,5": [
+      "water"
+    ],
+    "4,5": [
+      "water"
+    ],
+    "5,5": [
+      "water"
+    ],
+    "6,5": [
+      "water"
+    ],
+    "7,5": [
+      "mud"
+    ],
+    "7,4": [
+      "mud"
+    ],
+    "7,3": [
+      "mud"
+    ],
+    "7,2": [
+      "mud"
+    ],
+    "6,2": [
+      "mud"
+    ],
+    "6,3": [
+      "water"
+    ],
+    "6,4": [
+      "water"
+    ],
+    "5,4": [
+      "water"
+    ],
+    "4,4": [
+      "water"
+    ],
+    "3,4": [
+      "water"
+    ],
+    "2,4": [
+      "mud"
+    ],
+    "2,3": [
+      "mud"
+    ],
+    "3,3": [
+      "water"
+    ],
+    "4,3": [
+      "water"
+    ],
+    "5,3": [
+      "water"
+    ],
+    "5,2": [
+      "mud"
+    ],
+    "4,2": [
+      "mud"
+    ],
+    "3,2": [
+      "mud"
+    ],
+    "2,2": [
+      "mud"
+    ]
+  }
+}

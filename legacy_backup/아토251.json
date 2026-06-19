@@ -1,0 +1,76 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "banana": 1
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 23,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "description": [
+    "<h1>호수주변 산책하기</h1>",
+    "<p>리봇은 호수를 둘러보는 산책을 좋아합니다.<br> ",
+    "리봇 주변의 호수는 모두 다른 크기의 직사각형이기 때문에,<br> ",
+    "리봇은 항상 시작점으로 돌아오기 위해 몇 걸음 걸릴지 모릅니다. <br>",
+    "다행히도 리봇은 바나나를 가지고 있습니다.<br> ",
+    "리봇이 시작점에 바나나를 놓을 수 있도록 <code>put()</code> 명령을 사용할 수 있습니다. <br> ",
+    "리봇이 산책을 끝냈을 때는 다시 바나나를 발견할 수 있을 것입니다.</p>",
+    "<p>리봇이 산책을 끝낼 수 있도록 도와주세요.</p>",
+    "DIFFICULTY2",
+    ""
+  ],
+  "small_tiles": false,
+  "rows": 6,
+  "cols": 8,
+  "onload": [
+    "var x, y, width, height;",
+    "",
+    "width = RUR.randint(3, 13);",
+    "height = RUR.randint(3, 13);",
+    "RUR.set_world_size(width, height);",
+    "RUR.fill_background(\"water\");",
+    "",
+    "RUR.public.path = [];",
+    "",
+    "function add_tile(x, y) {",
+    "    RUR.add_background_tile(\"grass\", x, y);",
+    "    RUR.public.path.push([x, y]);",
+    "}",
+    "",
+    "// bottom row",
+    "for(x=1; x<=width; x++) {",
+    "    add_tile(x, 1);",
+    "}",
+    "// right column",
+    "for(y=2; y<=height; y++) {",
+    "    add_tile(width, y);",
+    "}",
+    "// top row",
+    "for(x=width-1; x>=1; x--) {",
+    "    add_tile(x, height);",
+    "}",
+    "// right column",
+    "for(y=height-1; y>=1; y--) {",
+    "    add_tile(1, y);",
+    "}",
+    ""
+  ]
+}

@@ -1,0 +1,6 @@
+React UI layer only.
+Responsibilities:
+- Layout, controls, viewport mounting, console
+- Subscribe to engine/trace, display state
+No world mutation except by dispatching engine actions.
+

@@ -1,0 +1,65 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "objects": {
+        "token": 200
+      },
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 4,
+      "model": "classic"
+    }
+  ],
+  "small_tiles": false,
+  "rows": 5,
+  "cols": 5,
+  "description": [
+    "<h1>중심을 찾아라!</h1>",
+    "<p>리봇! 세상의 중심을 찾아라! 세상은 4에서 12까지의 짝수의 너비와 높이를 가지고 있다.</p>",
+    "<p>리봇은 토큰을 가지고 있고, 세상의 중심에 4개의 토큰을 설치해야 한다.</p>",    
+    "<h3>필요한 기술사양</h3>",
+    "    <ul><li>The functions <code>move()</code>, ",
+    "        <code>turn_left()</code>, <code>take()</code> and ",
+    "        <code>put()</code>.</li>",
+    "    <li>The conditions <code>front_is_clear()</code> ",
+    "        or <code>wall_in_front()</code>, and <code>object_here()</code>.</li>",
+    "    <li>How to use <code>while</code> loops",
+    "        and <code>if</code> statements.</li>",
+    "</li></ul>",
+    "DIFFICULTY6",
+    ""
+  ],
+  "onload": [
+    "var mid_point_x = RUR.randint(1, 6),",
+    "    mid_point_y = RUR.randint(1, 6),",
+    "    x, y;",
+    "RUR.set_world_size(2*mid_point_x, 2*mid_point_y);",
+    "RUR.fill_background('grass');",
+    "RUR.add_object('token', mid_point_x, mid_point_y, {goal: true});",
+    "RUR.add_object('token', mid_point_x+1, mid_point_y, {goal: true});",
+    "RUR.add_object('token', mid_point_x, mid_point_y+1, {goal: true});",
+    "RUR.add_object('token', mid_point_x+1, mid_point_y+1, {goal: true});",
+    "for(x=1; x<=2*mid_point_x; x++) {",
+    "    RUR.add_background_tile('pale_grass', x, mid_point_y);",
+    "    RUR.add_background_tile('pale_grass', x, mid_point_y+1);",
+    "}",
+    "for(y=1; y<=2*mid_point_y; y++) {",
+    "    RUR.add_background_tile('pale_grass', mid_point_x, y);",
+    "    RUR.add_background_tile('pale_grass', mid_point_x+1, y);",
+    "}"
+  ]
+}

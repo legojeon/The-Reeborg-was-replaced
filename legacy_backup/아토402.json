@@ -1,0 +1,88 @@
+{
+    "robots": [
+      {
+        "x": 1,
+        "y": 1,
+        "objects": {
+          "token": 0
+        },
+        "_prev_x": 1,
+        "_prev_y": 1,
+        "_prev_orientation": 0,
+        "possible_initial_positions": [
+          [
+            1,
+            1
+          ]
+        ],
+        "_orientation": 0,
+        "_is_leaky": true,
+        "_trace_history": [],
+        "_trace_style": "default",
+        "_trace_color": "seagreen",
+        "__id": 25,
+        "model": "classic"
+      }
+    ],
+    "small_tiles": false,
+    "rows": 1,
+    "cols": 8,
+    "description": [
+      "<h1>중심을 찾아라!</h1>",
+      "<p>리봇! 세상의 중심을 찾아라! 세상은 4에서 12까지의 짝수의 너비를 가지고 있고 높이는 1이다.</p>",
+      "<p>리봇은 토큰을 가지고 있고, 세상의 중심에 토큰을 설치해야 한다.</p>",
+      "<h3>What you need to know</h3>",
+      "    <ul><li>The functions <code>move()</code>, ",
+      "        <code>turn_left()</code>, <code>take()</code> and ",
+      "        <code>put()</code>.</li>",
+      "    <li>The conditions <code>front_is_clear()</code> ",
+      "        or <code>wall_in_front()</code>, and <code>object_here()</code>.</li>",
+      "    <li>How to use <code>while</code> loops",
+      "        and <code>if</code> statements.</li>",
+      "</li></ul>",
+      "DIFFICULTY5",
+      ""
+    ],
+    "onload": [
+      "function shuffle(array) {",
+      "    return array.sort(() => Math.random() - 0.5);",
+      "}",
+      "function randint(min, max) {",
+      "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+      "};",
+      "let apple = randint(1, 9);",
+      "let banana = randint(1, 9);",
+      "RUR.set_world_size(10, 1);",
+      "RUR.fill_background('grass');",
+      "RUR.add_object('apple', 5, 1, {'number': apple});",
+      "RUR.add_object('apple', 6, 1, {'number': apple, 'goal': true});",
+      "RUR.add_object('banana', 7, 1, {'number': banana});",
+      "RUR.add_object('banana', 8, 1, {'number': banana, 'goal': true});",
+      "RUR.add_final_position('house', 10, 1);",
+      ""
+    ],
+    "tiles": {
+      "1,1": [
+        "grass"
+      ],
+      "2,1": [
+        "grass"
+      ],
+      "3,1": [
+        "grass"
+      ],
+      "6,1": [
+        "grass"
+      ],
+      "7,1": [
+        "grass"
+      ],
+      "8,1": [
+        "grass"
+      ]
+    },
+    "goal": {
+      "objects": {
+      }
+    }
+  }

@@ -1,0 +1,215 @@
+{
+    "robots": [
+        {
+            "x": 1,
+            "y": 1,
+            "orientation": 0,
+            "objects": {
+                "carrot": "0"
+            }
+        }
+    ],
+    "walls": {
+        "10,1": [
+            "east"
+        ],
+        "10,2": [
+            "east"
+        ],
+        "10,3": [
+            "east"
+        ],
+        "10,4": [
+            "east"
+        ],
+        "10,5": [
+            "east"
+        ],
+        "10,6": [
+            "east"
+        ],
+        "10,7": [
+            "east"
+        ],
+        "10,8": [
+            "east"
+        ],
+        "10,9": [
+            "east"
+        ],
+        "10,10": [
+            "east",
+            "north"
+        ],
+        "9,10": [
+            "north"
+        ],
+        "8,10": [
+            "north"
+        ],
+        "7,10": [
+            "north"
+        ],
+        "6,10": [
+            "north"
+        ],
+        "5,10": [
+            "north"
+        ],
+        "4,10": [
+            "north"
+        ],
+        "3,10": [
+            "north"
+        ],
+        "2,10": [
+            "north"
+        ],
+        "1,10": [
+            "north"
+        ]
+    },
+    "rows": 10,
+    "cols": 10,
+    "description": "당근을 모두 추수해 주세요! 화이팅!",
+    "goal": {
+        "objects": {}
+    },
+    "objects": {
+        "5,3": {
+            "carrot": 1
+        },
+        "5,4": {
+            "carrot": 1
+        },
+        "5,5": {
+            "carrot": 1
+        },
+        "5,6": {
+            "carrot": 1
+        },
+        "5,8": {
+            "carrot": 1
+        },
+        "4,8": {
+            "carrot": 1
+        },
+        "4,7": {
+            "carrot": 2
+        },
+        "4,5": {
+            "carrot": 1
+        },
+        "4,4": {
+            "carrot": 2
+        },
+        "6,7": {
+            "carrot": 1
+        },
+        "6,6": {
+            "carrot": 2
+        },
+        "6,5": {
+            "carrot": 1
+        },
+        "6,4": {
+            "carrot": 1
+        },
+        "6,3": {
+            "carrot": 1
+        },
+        "7,8": {
+            "carrot": 1
+        },
+        "7,7": {
+            "carrot": 1
+        },
+        "7,6": {
+            "carrot": 1
+        },
+        "7,4": {
+            "carrot": 2
+        },
+        "8,7": {
+            "carrot": 1
+        },
+        "8,6": {
+            "carrot": 1
+        },
+        "8,5": {
+            "carrot": 1
+        },
+        "3,8": {
+            "carrot": 1
+        },
+        "3,7": {
+            "carrot": 1
+        },
+        "3,6": {
+            "carrot": 1
+        },
+        "3,5": {
+            "carrot": 1
+        },
+        "3,4": {
+            "carrot": 1
+        },
+        "8,8": {
+            "carrot": 2
+        },
+        "8,4": {
+            "carrot": 1
+        },
+        "7,3": {
+            "carrot": 1
+        },
+        "3,3": {
+            "carrot": 1
+        },
+        "8,3": {
+            "carrot": 1
+        }
+    },
+    "small_tiles": false,
+    "onload": [
+        "function shuffle(array) {",
+        "    return array.sort(() => Math.random() - 0.5);",
+        "}",
+        "",
+        "function randint(min, max) {",
+        "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+        "};",
+        "",
+        "let matrix = [];",
+        "let total = 36;",
+        "let cnt = randint(5, 10);",
+        "// 0 채우기",
+        "for(let x=0; x<cnt; x++) {",
+        "    matrix.push(0);",
+        "}",
+        "// 1 채우기",
+        "cnt = randint(10, 20);",
+        "for(let x=0; x<10; x++) {",
+        "    matrix.push(1);",
+        "}",
+        "",
+        "cnt = total - matrix.length;",
+        "for(let x=0; x<cnt; x++) {",
+        "    matrix.push(2)",
+        "}",
+        "",
+        "matrix = shuffle(matrix);",
+        "",
+        "matrix.forEach( function(carrot, idx) {",
+        "    let x = idx % 6 + 3;",
+        "    let y = parseInt(idx / 6 + 3);",
+        "    RUR.add_object('carrot', x, y, {'number': carrot});",
+        "});",
+        "    ",
+        "    ",
+        "    ",
+        "    ",
+        "    ",
+        "    "
+    ]
+}

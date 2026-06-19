@@ -1,0 +1,62 @@
+{
+    "robots": [
+      {
+        "x": 1,
+        "y": 1,
+        "_prev_x": 1,
+        "_prev_y": 1,
+        "_prev_orientation": 0,
+        "objects": {
+            "apple": "infinite"
+        },
+        "_orientation": 0,
+        "_is_leaky": true,
+        "_trace_history": [],
+        "_trace_style": "default",
+        "_trace_color": "seagreen",
+        "__id": 14,
+        "model": "classic",
+        "possible_initial_positions": [
+          [
+            1,
+            1
+          ]
+        ]
+      }
+    ],
+    "walls": {},
+    "description": [
+        "<h1>최고의 사과나무를 찾아라(최댓값)</h1>",      
+        "<p>사과나무마다 수확량이 차이가 있습니다. </p>",
+        "<p>최대의 수확량을 보이는 사과나무의 수확량을 보고해 주세요.</p>",
+        "<p>사과나무는 8개입니다.</p>",
+        "<p>print() 문을 사용하여 변수값을 확인해 보는 것이 정신건강에 좋습니다. </p>",
+        ""
+    ],
+    "small_tiles": false,
+    "rows": 4,
+    "cols": 10,
+    "objects": {
+    },
+    "goal": {
+    },
+    "onload": [
+      "function shuffle(array) {",
+      "  return array.sort(() => Math.random() - 0.5);",
+      "}",
+      "",
+      "let apples = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,3,5,7,9,11,13,15];",
+      "apples = shuffle(apples);",
+      "let max_apple = 0;",
+      "apples.forEach( function(cnt, idx) {",
+      "    if( idx > 7) return false;",
+      "    RUR.add_object('apple', idx+2, 1, {'number': cnt});   ",
+      "    if( cnt > max_apple) max_apple = cnt;",
+      "});",
+      "",
+      "//RUR.add_object('apple', 4, 1, {'number': num1});",
+      "//RUR.add_object('apple', 5, 1, {'number': num2});",
+      "RUR.add_final_position('house', 10, 1);",
+      ""
+    ]
+  }

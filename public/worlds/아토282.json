@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E"
+  },
+  "id": "아토282",
+  "name": "아토282",
+  "difficulty": 2,
+  "description": [
+    "당근은 모두 추수해야 합니다. 화이팅!"
+  ],
+  "goal": {},
+  "generated": true,
+  "onload": [
+    "var cols = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];",
+    "",
+    "function getRand() {",
+    "  var col = cols[Math.floor(Math.random() * cols.length)];",
+    "  //console.log(col);",
+    "  return col;",
+    "}",
+    "",
+    "// 남쪽",
+    "for (var x=2; x<11; x++) {",
+    "    var cnt = getRand();",
+    "    RUR.add_object('carrot', x, 1, {'number': cnt} );",
+    "    RUR.add_object('carrot', x, 1, {'number': 1, 'goal': true} );",
+    "}",
+    "",
+    "// east ",
+    "for (var y=2; y<11; y++) {",
+    "    var cnt = getRand();",
+    "    RUR.add_object('carrot', 10, y, {'number': cnt} );",
+    "    RUR.add_object('carrot', 10, y, {'number': 1, 'goal': true} );",
+    "}",
+    "",
+    "//north",
+    "for (var x=2; x<11; x++) {",
+    "    var cnt = getRand();",
+    "    RUR.add_object('carrot', x, 10, {'number': cnt} );",
+    "    RUR.add_object('carrot', x, 10, {'number': 1, 'goal': true} );",
+    "}",
+    "",
+    "// west",
+    "for (var y=2; y<11; y++) {",
+    "    var cnt = getRand();",
+    "    RUR.add_object('carrot', 1, y, {'number': cnt} );",
+    "    RUR.add_object('carrot', 1, y, {'number': 1, 'goal': true} );",
+    "}",
+    "",
+    "//  (1, 1)",
+    "RUR.add_object('carrot', 1, 1, {'number': 1, 'goal': true} );",
+    ""
+  ]
+}

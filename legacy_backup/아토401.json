@@ -1,0 +1,87 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "objects": {
+        "token": 0
+      },
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ],
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 35,
+      "model": "classic"
+    }
+  ],
+  "small_tiles": false,
+  "rows": 1,
+  "cols": 10,
+  "description": [
+    "<h1>변수를 사용해서 사과를 다 먹고 창고에 저장합니다.</h1>",
+    ""
+  ],
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "};",
+    "",
+    "let apple = randint(1, 9);",
+    "let banana = randint(1, 9);",
+    "RUR.set_world_size(10, 1);",
+    "RUR.fill_background('grass');",
+    "RUR.add_object('apple', 9, 1, {'number': apple});",
+    "RUR.add_object('apple', 10, 1, {'number': apple, 'goal': apple});",
+    ""
+  ],
+  "tiles": {
+    "1,1": [
+      "grass"
+    ],
+    "2,1": [
+      "grass"
+    ],
+    "3,1": [
+      "grass"
+    ],
+    "6,1": [
+      "grass"
+    ],
+    "7,1": [
+      "grass"
+    ],
+    "8,1": [
+      "grass"
+    ],
+    "4,1": [
+      "grass"
+    ],
+    "5,1": [
+      "grass"
+    ],
+    "9,1": [
+      "grass"
+    ],
+    "10,1": [
+      "grass"
+    ]
+  },
+  "goal": {
+    "objects": {}
+  },
+  "objects": {
+  }
+}

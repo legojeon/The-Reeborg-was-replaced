@@ -1,0 +1,150 @@
+{
+  "robots": [
+    {
+      "x": 2,
+      "y": 4,
+      "_prev_x": 2,
+      "_prev_y": 4,
+      "_prev_orientation": 1,
+      "objects": {
+        "carrot": 100
+      },
+      "_orientation": 1,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 35,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          2,
+          4
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "3,4": [
+      "north"
+    ],
+    "4,4": [
+      "north"
+    ],
+    "2,5": [
+      "east"
+    ],
+    "2,6": [
+      "east"
+    ],
+    "3,6": [
+      "north"
+    ],
+    "4,6": [
+      "north",
+      "east"
+    ],
+    "4,5": [
+      "east"
+    ]
+  },
+  "description": [
+    "<h1>당근농장에 있는 당근을 모두 추수해 주세요. </h1>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 10,
+  "onload": [
+    "var side, choice, xpos, ypos;",
+    "for (side=1; side<=4; side++) {",
+    "    // east side",
+    "    if (side == 1) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            ypos = RUR.randint(5, 6);",
+    "            RUR.add_object('carrot', 5, ypos, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 5, 5, {'number': 1});",
+    "            RUR.add_object('carrot', 5, 6, {'number': 1});",
+    "        }",
+    "    }",
+    "    // west side",
+    "    if (side == 2) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            ypos = RUR.randint(5, 6);",
+    "            RUR.add_object('carrot', 2, ypos, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 2, 5, {'number': 1});",
+    "            RUR.add_object('carrot', 2, 6, {'number': 1});",
+    "        }",
+    "    }",
+    "    // south side",
+    "    if (side == 3) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(3, 4);",
+    "            RUR.add_object('carrot', xpos, 4, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 3, 4, {'number': 1});",
+    "            RUR.add_object('carrot', 4, 4, {'number': 1});",
+    "        }",
+    "    }",
+    "    // north side",
+    "    if (side == 4) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(3, 4);",
+    "            RUR.add_object('carrot', xpos, 7, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 3, 7, {'number': 1});",
+    "            RUR.add_object('carrot', 4, 7, {'number': 1});",
+    "        }",
+    "    }",
+    "}"
+  ],
+  "objects": {
+  },
+  "tiles": {
+    "2,4": [
+      "pale_grass"
+    ],
+    "2,5": [
+      "pale_grass"
+    ],
+    "2,6": [
+      "pale_grass"
+    ],
+    "2,7": [
+      "pale_grass"
+    ],
+    "3,7": [
+      "pale_grass"
+    ],
+    "4,7": [
+      "pale_grass"
+    ],
+    "5,7": [
+      "pale_grass"
+    ],
+    "5,6": [
+      "pale_grass"
+    ],
+    "5,5": [
+      "pale_grass"
+    ],
+    "5,4": [
+      "pale_grass"
+    ],
+    "4,4": [
+      "pale_grass"
+    ],
+    "3,4": [
+      "pale_grass"
+    ]
+  }
+}

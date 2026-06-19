@@ -1,0 +1,8 @@
+Engine: the single execution gate for actions.
+Responsibilities:
+- Maintain an action queue
+- Validate rules (bounds, walls)
+- Apply state changes to the world
+- Emit trace events for each step (success/failure)
+No rendering or UI logic here.
+

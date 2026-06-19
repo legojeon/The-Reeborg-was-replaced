@@ -1,0 +1,6 @@
+Type definitions shared across core and UI.
+Includes:
+- Direction, RobotPose, World, Action, TraceEvent
+- Shared constants/enums
+Keep small and pragmatic; no app logic here.
+

@@ -1,0 +1,45 @@
+{
+  "robots": [
+    {
+      "x": 2,
+      "y": 1,
+      "objects": {
+        "token": 100
+      },
+      "model": "classic",
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_prev_x": 2,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 219,
+      "possible_initial_positions": [
+        [
+          2,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "description": [
+    "<맵: 아토261>"
+  ],
+  "small_tiles": false,
+  "rows": 8,
+  "cols": 8,
+  "onload": [
+    "var width, height;",
+    "width = RUR.randint(5, 10);",
+    "height = RUR.randint(5, 10);",
+    "RUR.set_world_size(width, height);"
+  ],
+  "objects": {
+    "1,1": {
+      "token": 1
+    }
+  }
+}

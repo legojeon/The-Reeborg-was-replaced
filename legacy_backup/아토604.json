@@ -1,0 +1,81 @@
+{
+    "robots": [
+        {
+            "x": 1,
+            "y": 1,
+            "_prev_x": 1,
+            "_prev_y": 1,
+            "_prev_orientation": 3,
+            "objects": {
+                "star": 6
+            },
+            "_orientation": 0,
+            "_is_leaky": true,
+            "_trace_history": [],
+            "_trace_style": "default",
+            "_trace_color": "seagreen",
+            "__id": 4,
+            "model": "classic",
+            "initial_position": [
+                1,
+                1
+            ],
+            "possible_initial_positions": [
+                [
+                    1,
+                    1
+                ]
+            ]
+        }
+    ],
+    "walls": {
+    },
+    "small_tiles": false,
+    "rows": 10,
+    "cols": 17,
+    "tiles": {
+    },
+    "goal": {
+        "possible_final_positions": [
+            [
+                17,
+                1
+            ]
+        ],
+        "position": {
+            "image": "house",
+            "x": 17,
+            "y": 1
+        }
+    },
+    "description": [
+        "A simple, empty world, ready for Reeborg to explore."
+    ],
+    "onload": [
+        "function shuffle(array) {",
+        "    return array.sort(() => Math.random() - 0.5);",
+        "}",
+        "",
+        "function randint(min, max) {",
+        "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+        "};",
+        "",
+        "function build_wall(xpos, top) {",
+        "    for(let n=1; n<=top; n++) {",
+        "        RUR.add_wall('west', xpos, n); ",
+        "        RUR.add_wall('east', xpos, n); ",
+        "        RUR.add_background_tile('bricks', xpos, n);",
+        "    }",
+        "    RUR.add_wall('north', xpos, top); ",
+        "}",
+        "let heights = [3, 4, 5, 6, 7, 9];",
+        "heights = shuffle(heights);",
+        "build_wall(3, heights[0]);",
+        "build_wall(6, heights[1]);",
+        "build_wall(8, heights[2]);",
+        "build_wall(11, heights[3]);",
+        "build_wall(13, heights[4]);",
+        "build_wall(16, heights[5]);",
+        ""
+    ]
+}

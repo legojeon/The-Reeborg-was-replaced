@@ -1,0 +1,100 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "carrot": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 179,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "description": [
+    "<맵: 아토231>"
+  ],
+  "small_tiles": false,
+  "rows": 4,
+  "cols": 10,
+  "onload": [
+    "var n, choice, xpos;",
+    "for (n=1; n<=4; n++) {",
+    "    // first",
+    "    if (n == 1) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(3, 4);",
+    "            RUR.add_object('carrot', xpos, 1, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 3, 1, {'number': 1});",
+    "            RUR.add_object('carrot', 4, 1, {'number': 1});",
+    "        }",
+    "    }",
+    "    // second",
+    "    if (n == 2) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(5, 6);",
+    "            RUR.add_object('carrot', xpos, 1, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 5, 1, {'number': 1});",
+    "            RUR.add_object('carrot', 6, 1, {'number': 1});",
+    "        }",
+    "    }",
+    "    // third n",
+    "    if (n == 3) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(7, 8);",
+    "            RUR.add_object('carrot', xpos, 1, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 7, 1, {'number': 1});",
+    "            RUR.add_object('carrot', 8, 1, {'number': 1});",
+    "        }",
+    "    }",
+    "    // fourth n",
+    "    if (n == 4) {",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            xpos = RUR.randint(9, 10);",
+    "            RUR.add_object('carrot', xpos, 1, {'number': 1});",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.add_object('carrot', 9, 1, {'number': 1});",
+    "            RUR.add_object('carrot', 10, 1, {'number': 1});",
+    "        }",
+    "    }",
+    "}"
+  ],
+  "walls": {
+    "2,1": [
+      "east"
+    ],
+    "4,1": [
+      "east"
+    ],
+    "6,1": [
+      "east"
+    ],
+    "8,1": [
+      "east"
+    ]
+  }
+}

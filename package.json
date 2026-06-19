@@ -1,0 +1,35 @@
+{
+  "name": "the-reeborg-was-replaced",
+  "version": "1.0.0",
+  "description": "The-Reeborg-was-replaced — a 3D educational Python coding environment",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@codemirror/autocomplete": "^6.20.3",
+    "@codemirror/commands": "^6.10.3",
+    "@codemirror/lang-python": "^6.2.1",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@codemirror/view": "^6.39.4",
+    "lucide-react": "^1.18.0",
+    "react": "^19.2.3",
+    "react-canvas-confetti": "^2.0.7",
+    "react-dom": "^19.2.3",
+    "react-router-dom": "^6.23.1",
+    "three": "^0.182.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.182.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0"
+  }
+}

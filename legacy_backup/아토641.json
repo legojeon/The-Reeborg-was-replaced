@@ -1,0 +1,208 @@
+{
+  "robots": [
+    {
+      "x": 2,
+      "y": 5,
+      "_prev_x": 2,
+      "_prev_y": 5,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 377,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          2,
+          5
+        ]
+      ]
+    }
+  ],
+  "walls": {
+    "2,4": [
+      "east"
+    ],
+    "3,3": [
+      "north"
+    ],
+    "5,3": [
+      "north"
+    ],
+    "6,3": [
+      "north",
+      "east"
+    ],
+    "6,2": [
+      "east"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "9,1": [
+      "north"
+    ],
+    "10,1": [
+      "north"
+    ],
+    "10,2": [
+      "east"
+    ],
+    "8,1": [
+      "north"
+    ],
+    "4,3": [
+      "north"
+    ],
+    "2,6": [
+      "east"
+    ],
+    "2,7": [
+      "east"
+    ],
+    "2,8": [
+      "east"
+    ],
+    "2,9": [
+      "east"
+    ],
+    "2,10": [
+      "east"
+    ],
+    "2,11": [
+      "east"
+    ],
+    "3,11": [
+      "north"
+    ],
+    "4,11": [
+      "north"
+    ],
+    "5,11": [
+      "north"
+    ],
+    "6,11": [
+      "north"
+    ],
+    "7,11": [
+      "north"
+    ],
+    "8,11": [
+      "north"
+    ],
+    "9,11": [
+      "north"
+    ],
+    "10,11": [
+      "north",
+      "east"
+    ],
+    "10,10": [
+      "east"
+    ],
+    "10,9": [
+      "east"
+    ],
+    "10,8": [
+      "east"
+    ],
+    "10,7": [
+      "east"
+    ],
+    "10,6": [
+      "east"
+    ],
+    "10,5": [
+      "east"
+    ],
+    "10,4": [
+      "east"
+    ],
+    "10,3": [
+      "east"
+    ]
+  },
+  "description": [
+    "<맵: 아토641>"
+  ],
+  "small_tiles": false,
+  "rows": 15,
+  "cols": 15,
+  "onload": [
+    "var side, choice, target1, target2, target3;",
+    "for (side=1; side<=4; side++) {",
+    "    // east side",
+    "    if (side == 1) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(3, 10);",
+    "            target2 = RUR.randint(3, 10);",
+    "            target3 = RUR.randint(3, 10);",
+    "            if (target1 != target2 && target2 != target3 && target3 != target1) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 3);",
+    "        if (choice == 1) {",
+    "            RUR.remove_wall('east', 10, target1);",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.remove_wall('east', 10, target1);",
+    "            RUR.remove_wall('east', 10, target2);",
+    "        }",
+    "        if (choice == 3) {",
+    "            RUR.remove_wall('east', 10, target1);",
+    "            RUR.remove_wall('east', 10, target2);",
+    "            RUR.remove_wall('east', 10, target3);",
+    "        }",
+    "    }",
+    "    // west side",
+    "    if (side == 2) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(7, 10);",
+    "            target2 = RUR.randint(7, 10);",
+    "            if (target1 != target2) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 2);",
+    "        if (choice == 1) {",
+    "            RUR.remove_wall('west', 3, target1);",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.remove_wall('west', 3, target1);",
+    "            RUR.remove_wall('west', 3, target2);",
+    "        }",
+    "    }",
+    "    // south side",
+    "    if (side == 3) {",
+    "        target1 = RUR.randint(4, 5);",
+    "        target2 = RUR.randint(8, 9);",
+    "        RUR.remove_wall('south', target1, 4);",
+    "        RUR.remove_wall('south', target2, 2);",
+    "    }",
+    "    // north side",
+    "    if (side == 4) {",
+    "        while (true) {",
+    "            target1 = RUR.randint(4, 9);",
+    "            target2 = RUR.randint(4, 9);",
+    "            target3 = RUR.randint(4, 9);",
+    "            if (target1 != target2 && target2 != target3 && target3 != target1) {break;}",
+    "        }",
+    "        choice = RUR.randint(1, 3);",
+    "        if (choice == 1) {",
+    "            RUR.remove_wall('north', target1, 11);",
+    "        }",
+    "        if (choice == 2) {",
+    "            RUR.remove_wall('north', target1, 11);",
+    "            RUR.remove_wall('north', target2, 11);",
+    "        }",
+    "        if (choice == 3) {",
+    "            RUR.remove_wall('north', target1, 11);",
+    "            RUR.remove_wall('north', target2, 11);",
+    "            RUR.remove_wall('north', target3, 11);",
+    "        }",
+    "    }",
+    "}"
+  ]
+}

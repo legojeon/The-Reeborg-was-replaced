@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E"
+  },
+  "id": "base",
+  "name": "base",
+  "description": [
+    "기본 10x10 월드"
+  ]
+}

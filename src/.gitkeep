@@ -1,0 +1,6 @@
+Top-level source code. Contains the app entry, root components, and setup.
+Expected files:
+- main.tsx / App.tsx
+- Global providers and style imports
+- Route to UI layout and mount points
+

@@ -1,0 +1,176 @@
+{
+    "robots": [
+      {
+        "x": 1,
+        "y": 10,
+        "objects": {},
+        "model": "classic",
+        "_orientation": 0,
+        "_is_leaky": true,
+        "_prev_x": 1,
+        "_prev_y": 10,
+        "_prev_orientation": 0,
+        "_trace_history": [],
+        "_trace_style": "default",
+        "_trace_color": "seagreen",
+        "__id": 4,
+        "possible_initial_positions": [
+          [
+            1,
+            10
+          ]
+        ]
+      }
+    ],
+    "walls": {
+      "1,9": [
+        "north",
+        "east"
+      ],
+      "1,8": [
+        "east"
+      ],
+      "1,7": [
+        "east"
+      ],
+      "1,6": [
+        "east"
+      ],
+      "1,5": [
+        "east"
+      ],
+      "1,4": [
+        "east"
+      ],
+      "1,3": [
+        "east"
+      ],
+      "1,2": [
+        "east"
+      ],
+      "2,1": [
+        "north"
+      ],
+      "3,1": [
+        "north"
+      ],
+      "4,1": [
+        "north"
+      ],
+      "5,1": [
+        "north"
+      ],
+      "6,1": [
+        "north"
+      ],
+      "7,1": [
+        "north"
+      ],
+      "8,1": [
+        "north"
+      ],
+      "9,1": [
+        "north"
+      ],
+      "10,1": [
+        "north"
+      ]
+    },
+    "description": [
+      "<h1>가장 비싼 당근을 찾아라!</h1>",
+      "<p>리봇은 바닥에 있는 당근 중 숫자가 가장 큰 당근만 골라서 다시 가져와야 합니다. </p>",
+      "<p>당근은 무작위로 배치되어 있습니다. </p>",
+      "<p>당근을 고르기 위해 다음의 방법을 사용할 수도 있습니다. </p>",
+      "<ul>",
+      "<li>당근을 하나씩 살펴본다.</li>",
+      "<li>그 당근의 숫자가 지금까지 본 당근 중 가장 큰 숫자보다 크면, 그 당근을 기억한다.</li>",
+      "<li>모든 당근을 살펴보고 나면, 기억한 당근을 가져온다.</li>",
+      "</ul>",
+      "<p>당신만의 창의적인 방법을 찾아도 됩니다. </p>"
+    ],
+    "small_tiles": false,
+    "rows": 10,
+    "cols": 10,
+    "tiles": {
+      "1,9": [
+        "bricks"
+      ],
+      "1,8": [
+        "bricks"
+      ],
+      "1,7": [
+        "bricks"
+      ],
+      "1,6": [
+        "bricks"
+      ],
+      "1,5": [
+        "bricks"
+      ],
+      "1,4": [
+        "bricks"
+      ],
+      "1,3": [
+        "bricks"
+      ],
+      "1,2": [
+        "bricks"
+      ],
+      "1,1": [
+        "bricks"
+      ],
+      "2,1": [
+        "bricks"
+      ],
+      "3,1": [
+        "bricks"
+      ],
+      "4,1": [
+        "bricks"
+      ],
+      "5,1": [
+        "bricks"
+      ],
+      "6,1": [
+        "bricks"
+      ],
+      "7,1": [
+        "bricks"
+      ],
+      "8,1": [
+        "bricks"
+      ],
+      "9,1": [
+        "bricks"
+      ],
+      "10,1": [
+        "bricks"
+      ]
+    },
+    "onload": [
+      "function shuffle(array) {",
+      "    return array.sort(() => Math.random() - 0.5);",
+      "}",
+      "function randint(min, max) {",
+      "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+      "};",
+      "",
+      "positions = [];",
+      "for(let x=3; x<10; x++) {",
+      "    positions.push( randint(1, 19) );",
+      "}",
+      "",
+      "positions.forEach( function( x, idx ) {",
+      "    RUR.add_object('carrot',  idx+3, 2, {'number': x});           ",
+      "});"
+    ],
+    "objects": {
+      "3,2": {},
+      "4,2": {},
+      "5,2": {},
+      "6,2": {},
+      "7,2": {},
+      "8,2": {},
+      "9,2": {}
+    }
+  }

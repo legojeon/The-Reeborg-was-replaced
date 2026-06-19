@@ -1,0 +1,51 @@
+{
+  "robots": [
+    {
+      "x": 1,
+      "y": 1,
+      "_prev_x": 1,
+      "_prev_y": 1,
+      "_prev_orientation": 0,
+      "objects": {
+        "token": 100
+      },
+      "_orientation": 0,
+      "_is_leaky": true,
+      "_trace_history": [],
+      "_trace_style": "default",
+      "_trace_color": "seagreen",
+      "__id": 346,
+      "model": "classic",
+      "possible_initial_positions": [
+        [
+          1,
+          1
+        ]
+      ]
+    }
+  ],
+  "walls": {},
+  "description": [
+    "<맵: 아토591>"
+  ],
+  "small_tiles": false,
+  "rows": 10,
+  "cols": 17,
+  "onload": [
+    "var xpos = [3, 6, 8, 11, 14, 16];",
+    "var i, choice;",
+    "for (i=0; i<xpos.length; i++) {",
+    "    choice = RUR.randint(1, 9);",
+    "    RUR.add_wall('north', xpos[i], choice);",
+    "    for (n=1; n<=choice; n++) {",
+    "        RUR.add_wall('west', xpos[i], n);",
+    "        RUR.add_wall('east', xpos[i], n);",
+    "    }",
+    "}"
+  ],
+  "objects": {
+    "17,1": {
+      "token": 99
+    }
+  }
+}

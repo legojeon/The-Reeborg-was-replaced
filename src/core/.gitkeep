@@ -1,0 +1,4 @@
+Core domain logic (framework-agnostic).
+Holds world state, engine, types, renderer bindings, and py bridge.
+No React or DOM here; pure TS modules intended for reuse/testing.
+

@@ -74,6 +74,29 @@ html, body, #root {
   color: var(--text-main);
 }
 
+/* Editor title row: title on the left, download button on the right */
+.editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.editor-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.editor-download:hover { background: var(--hover-bg); color: var(--text-main); }
+
 /* Draggable divider */
 .resizer {
   background: transparent;
@@ -202,7 +225,7 @@ button.btn {
 
 /* Bare <button> fallback. Intentionally does NOT force height/padding so
    component classes (.tool-card, .ctx-stepper button, …) keep their own sizing. */
-button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn) {
+button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn):not(.mission-toggle):not(.editor-download):not(.maker-zoom-btn):not(.maker-zoom-pct) {
   font-size: 14px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--panel-border);
@@ -211,8 +234,8 @@ button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab
   cursor: pointer;
   transition: background 0.12s, border-color 0.12s;
 }
-button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn):hover { background: var(--hover-bg); }
-button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn):disabled { opacity: 0.45; cursor: not-allowed; }
+button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn):not(.mission-toggle):not(.editor-download):not(.maker-zoom-btn):not(.maker-zoom-pct):hover { background: var(--hover-bg); }
+button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab):not(.help-close):not(.variant-tab-icon):not(.wm-icon-btn):not(.mission-toggle):not(.editor-download):not(.maker-zoom-btn):not(.maker-zoom-pct):disabled { opacity: 0.45; cursor: not-allowed; }
 
 /* Language toggle — square globe button with a dropdown menu */
 .lang-toggle {
@@ -393,7 +416,31 @@ button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab
   overflow: auto;
   flex-shrink: 0;
 }
-.mission-header { margin-bottom: 8px; }
+.mission-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+/* When collapsed the card shrinks to just the header row */
+.mission-panel.collapsed { max-height: none; }
+.mission-panel.collapsed .mission-header { margin-bottom: 0; }
+.mission-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.mission-toggle:hover { background: var(--hover-bg); color: var(--text-main); }
 .mission-tag {
   display: inline-flex;
   align-items: center;
@@ -697,12 +744,53 @@ button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab
 }
 /* Center column: context bar on top, board fills the rest */
 .maker-center {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-height: 0;
   min-width: 0;
 }
+
+/* Zoom controls pinned to the bottom-right of the board area */
+.maker-zoom {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+}
+.maker-zoom-btn,
+.maker-zoom-pct {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.maker-zoom-btn { width: 28px; }
+.maker-zoom-pct {
+  min-width: 46px;
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+}
+.maker-zoom-btn:hover,
+.maker-zoom-pct:hover { background: var(--hover-bg); color: var(--text-main); }
+.maker-zoom-btn:disabled { opacity: 0.4; cursor: not-allowed; background: transparent; }
 .maker-board-wrap {
   flex: 1;
   display: flex;
@@ -716,6 +804,8 @@ button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab
   padding: 20px;
 }
 .maker-board-inner {
+  /* Always centered (via the wrap's align/justify-content). For maps too large
+     to fit, use the zoom controls to scale the board down. */
   background: #ffffff;
   border-radius: 10px;
   box-shadow: var(--shadow-md);

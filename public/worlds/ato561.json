@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 7,
+    "cols": 7
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E"
+  },
+  "id": "ato561",
+  "name": "ato561",
+  "difficulty": 5,
+  "description": [
+    "<맵: ato561>"
+  ],
+  "walls": {
+    "1,7": [
+      "east"
+    ]
+  },
+  "generated": true,
+  "onload": [
+    "var row, col, choice;",
+    "for (row=1; row<=6; row++) {",
+    "    for (col=2; col<=7; col++) {",
+    "        choice = RUR.randint(1, 2);",
+    "        RUR.add_object('token', col, row, {'number': choice});",
+    "    }",
+    "}"
+  ]
+}

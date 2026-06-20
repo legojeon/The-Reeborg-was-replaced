@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato141",
+  "name": "ato141",
+  "difficulty": 1,
+  "description": [
+    "<맵: ato141S>"
+  ],
+  "walls": {
+    "4,1": [
+      "north"
+    ],
+    "2,2": [
+      "east"
+    ],
+    "2,3": [
+      "east"
+    ],
+    "3,3": [
+      "north"
+    ],
+    "4,3": [
+      "north",
+      "east"
+    ],
+    "4,2": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ]
+  }
+}

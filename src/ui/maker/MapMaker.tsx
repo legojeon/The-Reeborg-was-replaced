@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   BrickWall, RotateCw, Eraser, Flag, Ban, Target, Save, CheckCircle2, FilePlus2, Trash2,
-  Download, ArrowLeft, Dices, BookOpen, Lightbulb, Wrench, Bot, Copy, X, Loader2, XCircle
+  Download, ArrowLeft, Dices, BookOpen, Lightbulb, Wrench, Bot, Copy, X, Loader2, XCircle,
+  ZoomIn, ZoomOut
 } from 'lucide-react';
 import type { Direction } from '../../core/types/types';
 import type { ObjectKind } from '../../core/world/objectKinds';
@@ -22,6 +23,11 @@ import { validateSolution, type SolutionCheck, type SolutionReport } from './val
 
 const CELL = 54;
 const PAD = 16;
+
+const ZOOM_MIN = 0.4;
+const ZOOM_MAX = 2;
+const ZOOM_STEP = 0.2;
+const clampZoom = (z: number) => Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, Math.round(z * 100) / 100));
 
 const OBJECT_KINDS: ObjectKind[] = ['token', 'carrot', 'apple', 'banana', 'leaf', 'dandelion'];
 const TILE_KINDS: TileKind[] = ['grass', 'pale_grass', 'ice', 'mud', 'water', 'gravel', 'bricks'];
@@ -45,6 +51,8 @@ export default function MapMaker() {
 
   const [state, setState] = React.useState<MakerState>(() => createEmptyMaker());
   const [tool, setTool] = React.useState<Tool>('wall');
+  // Board zoom factor (1 = 100%). Scales the SVG only; grid coordinates stay the same.
+  const [zoom, setZoom] = React.useState<number>(1);
   // Store the i18n key (not the translated text) so the message follows the language.
   const [savedMsg, setSavedMsg] = React.useState<string>('');
   // Solution-check state: null = not run, [] while we wait on the first run.
@@ -297,7 +305,7 @@ export default function MapMaker() {
           />
           <div className="maker-board-wrap">
             <div className="maker-board-inner">
-              <svg width={boardW} height={boardH} onContextMenu={(e) => e.preventDefault()} style={{ userSelect: 'none', display: 'block' }}>
+              <svg width={boardW * zoom} height={boardH * zoom} viewBox={`0 0 ${boardW} ${boardH}`} onContextMenu={(e) => e.preventDefault()} style={{ userSelect: 'none', display: 'block' }}>
                 {/* cells + tiles */}
                 {range(rows).flatMap(ry => range(cols).map(cx => {
                   const x = cx + 1, y = ry + 1;
@@ -395,6 +403,11 @@ export default function MapMaker() {
                 }))}
               </svg>
             </div>
+          </div>
+          <div className="maker-zoom">
+            <button className="maker-zoom-btn" onClick={() => setZoom(z => clampZoom(z - ZOOM_STEP))} disabled={zoom <= ZOOM_MIN} aria-label={t('mk.zoomOut')} title={t('mk.zoomOut')}><ZoomOut size={16} /></button>
+            <button className="maker-zoom-pct" onClick={() => setZoom(1)} aria-label={t('mk.zoomReset')} title={t('mk.zoomReset')}>{Math.round(zoom * 100)}%</button>
+            <button className="maker-zoom-btn" onClick={() => setZoom(z => clampZoom(z + ZOOM_STEP))} disabled={zoom >= ZOOM_MAX} aria-label={t('mk.zoomIn')} title={t('mk.zoomIn')}><ZoomIn size={16} /></button>
           </div>
         </div>
 

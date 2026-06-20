@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 8,
+    "cols": 8
+  },
+  "robot": {
+    "x": 2,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato261",
+  "name": "ato261",
+  "difficulty": 2,
+  "description": [
+    "<맵: ato261>"
+  ],
+  "objects": {
+    "1,1": {
+      "token": 1
+    }
+  },
+  "generated": true,
+  "onload": [
+    "var width, height;",
+    "width = RUR.randint(5, 10);",
+    "height = RUR.randint(5, 10);",
+    "RUR.set_world_size(width, height);"
+  ]
+}

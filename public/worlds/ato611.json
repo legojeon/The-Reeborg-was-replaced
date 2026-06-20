@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato611",
+  "name": "ato611",
+  "difficulty": 6,
+  "description": [
+    "<맵: ato611>"
+  ],
+  "generated": true,
+  "onload": [
+    "var x, y, width, height;",
+    "width = RUR.randint(5, 15);",
+    "height = 7;",
+    "RUR.set_world_size(width, height);"
+  ]
+}

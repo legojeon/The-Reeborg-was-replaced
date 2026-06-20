@@ -1,0 +1,88 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato400",
+  "name": "ato400",
+  "difficulty": 4,
+  "description": [
+    "<맵: ato400S>"
+  ],
+  "walls": {
+    "1,1": [
+      "east"
+    ],
+    "1,2": [
+      "east"
+    ],
+    "1,3": [
+      "north"
+    ],
+    "2,3": [
+      "north",
+      "east"
+    ],
+    "1,4": [
+      "east"
+    ],
+    "3,4": [
+      "north"
+    ],
+    "4,4": [
+      "north",
+      "east"
+    ],
+    "5,3": [
+      "north",
+      "east"
+    ],
+    "5,2": [
+      "north",
+      "east"
+    ],
+    "4,2": [
+      "east"
+    ],
+    "5,1": [
+      "east"
+    ],
+    "3,2": [
+      "east"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "2,2": [
+      "east"
+    ],
+    "1,5": [
+      "north"
+    ],
+    "2,5": [
+      "north"
+    ],
+    "3,5": [
+      "north"
+    ],
+    "4,5": [
+      "north"
+    ],
+    "5,5": [
+      "north",
+      "east"
+    ]
+  },
+  "objects": {
+    "6,4": {
+      "token": 1
+    }
+  }
+}

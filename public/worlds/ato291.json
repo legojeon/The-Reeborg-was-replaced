@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato291",
+  "name": "ato291",
+  "difficulty": 2,
+  "description": [
+    "<맵: ato291>"
+  ],
+  "walls": {
+    "1,1": [
+      "north"
+    ],
+    "2,1": [
+      "north"
+    ],
+    "3,1": [
+      "north"
+    ],
+    "4,1": [
+      "north"
+    ],
+    "5,1": [
+      "north"
+    ],
+    "6,1": [
+      "north"
+    ],
+    "7,1": [
+      "north"
+    ],
+    "8,1": [
+      "north"
+    ],
+    "9,1": [
+      "north"
+    ],
+    "10,1": [
+      "north"
+    ]
+  },
+  "generated": true,
+  "onload": [
+    "var xpos, choice;",
+    "for (xpos=2; xpos<=10; xpos++) {",
+    "    choice = RUR.randint(0, 2);",
+    "    if (choice != 0) {",
+    "        RUR.add_object('token', xpos, 1, {'number': choice});",
+    "    }",
+    "}"
+  ]
+}

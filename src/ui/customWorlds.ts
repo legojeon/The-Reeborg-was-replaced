@@ -2,7 +2,7 @@
 // Reeborg-format JSON (the same format as public/worlds/*.json).
 
 const KEY = 'reeborg3d.customWorlds.v1';
-// Built-in (아토) missions the user has removed from their catalog/dropdown.
+// Built-in (ato) missions the user has removed from their catalog/dropdown.
 const HIDDEN_KEY = 'reeborg3d.hiddenBuiltins.v1';
 
 export const CUSTOM_ID_PREFIX = 'custom:';

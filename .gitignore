@@ -47,6 +47,9 @@ Thumbs.db
 .tern-port
 .repl_history
 
+# Legacy migration backups (kept locally, not published)
+legacy_backup/
+
 # NOTE: public/worlds/index.json is a committed artifact (the app fetches it at
 # runtime; it is produced once by scripts/migrateWorldsToV2.ts, not at build
 # time). Do NOT ignore it, or the world list will be empty on a fresh clone.

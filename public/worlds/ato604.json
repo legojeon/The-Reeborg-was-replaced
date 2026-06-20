@@ -1,0 +1,58 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 17
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E"
+  },
+  "id": "ato604",
+  "name": "ato604",
+  "difficulty": 6,
+  "description": [
+    "A simple, empty world, ready for Reeborg to explore."
+  ],
+  "goal": {
+    "position": {
+      "x": 17,
+      "y": 1
+    },
+    "finalPositions": [
+      [
+        17,
+        1
+      ]
+    ]
+  },
+  "generated": true,
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "};",
+    "",
+    "function build_wall(xpos, top) {",
+    "    for(let n=1; n<=top; n++) {",
+    "        RUR.add_wall('west', xpos, n); ",
+    "        RUR.add_wall('east', xpos, n); ",
+    "        RUR.add_background_tile('bricks', xpos, n);",
+    "    }",
+    "    RUR.add_wall('north', xpos, top); ",
+    "}",
+    "let heights = [3, 4, 5, 6, 7, 9];",
+    "heights = shuffle(heights);",
+    "build_wall(3, heights[0]);",
+    "build_wall(6, heights[1]);",
+    "build_wall(8, heights[2]);",
+    "build_wall(11, heights[3]);",
+    "build_wall(13, heights[4]);",
+    "build_wall(16, heights[5]);",
+    ""
+  ]
+}

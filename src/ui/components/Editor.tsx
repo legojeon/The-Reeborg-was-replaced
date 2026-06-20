@@ -6,6 +6,7 @@ import { indentUnit, bracketMatching } from '@codemirror/language';
 import { defaultKeymap, history, historyKeymap, indentWithTab } from '@codemirror/commands';
 import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap, acceptCompletion, type CompletionContext, type CompletionResult } from '@codemirror/autocomplete';
 import { oneDark } from '@codemirror/theme-one-dark';
+import { Download } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { PythonLogo } from './icons/PythonLogo';
 
@@ -16,6 +17,8 @@ interface Props {
   activeLine?: number | null;
   // 1-based line with an error (red highlight)
   errorLine?: number | null;
+  // Filename used when downloading the code (e.g. "ato101.py")
+  downloadName?: string;
 }
 
 // ---- line highlight (executing / error) ----
@@ -95,10 +98,24 @@ function reeborgCompletions(context: CompletionContext): CompletionResult | null
   };
 }
 
-export function Editor({ code, onChange, activeLine = null, errorLine = null }: Props) {
+export function Editor({ code, onChange, activeLine = null, errorLine = null, downloadName = 'reeborg.py' }: Props) {
   const { t } = useI18n();
   const hostRef = React.useRef<HTMLDivElement | null>(null);
   const viewRef = React.useRef<EditorView | null>(null);
+
+  // Save the current editor contents as a .py file.
+  function handleDownload() {
+    const text = viewRef.current?.state.doc.toString() ?? code;
+    const blob = new Blob([text], { type: 'text/x-python;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = downloadName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
 
   React.useEffect(() => {
     if (!hostRef.current) return;
@@ -169,7 +186,18 @@ export function Editor({ code, onChange, activeLine = null, errorLine = null }: 
 
   return (
     <div style={{ display: 'grid', gridTemplateRows: 'auto 1fr', gap: 6, minHeight: 0, minWidth: 0 }}>
-      <strong className="panel-title"><PythonLogo size={16} /> {t('editor.title')}</strong>
+      <div className="editor-header">
+        <strong className="panel-title"><PythonLogo size={16} /> {t('editor.title')}</strong>
+        <button
+          type="button"
+          className="editor-download"
+          onClick={handleDownload}
+          aria-label={t('editor.download')}
+          title={t('editor.download')}
+        >
+          <Download size={16} />
+        </button>
+      </div>
       <div ref={hostRef} style={{ height: '100%', minHeight: 0 }} />
     </div>
   );

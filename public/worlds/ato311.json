@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 10,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E",
+    "tokens": 100
+  },
+  "id": "ato311",
+  "name": "ato311",
+  "difficulty": 3,
+  "description": [
+    "<맵: ato311>"
+  ],
+  "generated": true,
+  "onload": [
+    "var xpos, choice;",
+    "for (xpos=2; xpos<=9; xpos++) {",
+    "    choice = RUR.randint(0, 99);",
+    "    if (choice != 0) {",
+    "        RUR.add_object('token', xpos, 1, {'number': choice});",
+    "    }",
+    "}"
+  ]
+}

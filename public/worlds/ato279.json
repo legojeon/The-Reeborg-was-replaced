@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "size": {
+    "rows": 4,
+    "cols": 10
+  },
+  "robot": {
+    "x": 1,
+    "y": 1,
+    "dir": "E"
+  },
+  "id": "ato279",
+  "name": "ato279",
+  "difficulty": 2,
+  "description": [
+    "모든 당근을 수집하세요."
+  ],
+  "generated": true,
+  "onload": [
+    "function shuffle(array) {",
+    "    return array.sort(() => Math.random() - 0.5);",
+    "}",
+    "",
+    "function randint(min, max) {",
+    "    return Math.floor(Math.random() * (max - min + 1)) + min;",
+    "};",
+    "",
+    "let cnt = randint(100, 200);",
+    "RUR.add_object('carrot', 5, 1, {'number': cnt});"
+  ]
+}

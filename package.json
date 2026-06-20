@@ -4,9 +4,9 @@
   "description": "The-Reeborg-was-replaced — a 3D educational Python coding environment",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview --port 4173"
+    "preview": "vite preview --host --port 4173"
   },
   "keywords": [],
   "author": "",

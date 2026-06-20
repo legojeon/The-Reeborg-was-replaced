@@ -27,10 +27,28 @@ const RESULT_KEY = 'reeborg3d.resultHeight';
 const RESULT_MIN = 56;
 const RESULT_DEFAULT = 130;
 
+// Per-mission code cache. Each world (and the default free-play buffer) keeps its
+// own code in localStorage, so switching missions or refreshing restores what the
+// user last typed for that world.
+const CODE_KEY_PREFIX = 'reeborg3d.code.';
+const codeKey = (id: string | null) => CODE_KEY_PREFIX + (id ?? '__default__');
+function loadCachedCode(id: string | null): string {
+  try {
+    const v = localStorage.getItem(codeKey(id));
+    return v != null ? v : DEFAULT_CODE;
+  } catch {
+    return DEFAULT_CODE;
+  }
+}
+// Strip characters that are illegal in filenames so the download name is safe.
+function safeFileName(name: string): string {
+  return name.replace(/[\\/:*?"<>|]+/g, '_').trim() || 'reeborg';
+}
+
 export default function App() {
   const { lang, t } = useI18n();
   const [world, setWorld] = React.useState<World>(() => createDefaultWorld(10, 10));
-  const [code, setCode] = React.useState<string>(DEFAULT_CODE);
+  const [code, setCode] = React.useState<string>(() => loadCachedCode(null));
   const [selectedWorldId, setSelectedWorldId] = React.useState<string | null>(null);
   const [worlds, setWorlds] = React.useState<WorldOption[]>([]);
   const [customWorlds, setCustomWorlds] = React.useState<WorldOption[]>([]);
@@ -54,6 +72,9 @@ export default function App() {
   const [showFailure, setShowFailure] = React.useState<boolean>(false);
   const [showDone, setShowDone] = React.useState<boolean>(false);
   const initializedRef = React.useRef<boolean>(false);
+  // Skip the very first save so the initial mount doesn't clobber a cached buffer
+  // before the active world (and its code) has loaded.
+  const codeSaveReadyRef = React.useRef<boolean>(false);
   // Normalize IDs to handle NFC/NFD differences for Korean text in URLs and index.json
   const norm = React.useCallback((s: string | null | undefined) => {
     if (s == null) return s as any;
@@ -101,6 +122,20 @@ export default function App() {
     return [...customWorlds, ...worlds.filter(w => !hidden.has(w.id))];
   }, [worlds, customWorlds]);
 
+  // Auto-cache the editor code for the active world whenever it changes (typing,
+  // solution apply, etc.). The first run is skipped via codeSaveReadyRef.
+  React.useEffect(() => {
+    if (!codeSaveReadyRef.current) {
+      codeSaveReadyRef.current = true;
+      return;
+    }
+    try {
+      localStorage.setItem(codeKey(selectedWorldId), code);
+    } catch {
+      /* storage full or unavailable — ignore */
+    }
+  }, [code, selectedWorldId]);
+
   const {
     robot,
     objects,
@@ -127,6 +162,7 @@ export default function App() {
     const idNorm = norm(id);
     if (!idNorm) {
       setSelectedWorldId(null);
+      setCode(loadCachedCode(null));
       try {
         const loaded = await loadReeborgWorld('/worlds/base.json');
         setWorld(loaded);
@@ -144,6 +180,7 @@ export default function App() {
       const rec = getCustomWorld(idNorm.slice(CUSTOM_ID_PREFIX.length));
       if (!rec) return;
       setSelectedWorldId(idNorm);
+      setCode(loadCachedCode(idNorm));
       try {
         const loaded = normalizeWorld(rec.data);
         setWorld(loaded);
@@ -159,6 +196,7 @@ export default function App() {
       return;
     }
     setSelectedWorldId(meta.id);
+    setCode(loadCachedCode(meta.id));
     try {
       const loaded = await loadReeborgWorld(meta.path);
       setWorld(loaded);
@@ -310,6 +348,13 @@ export default function App() {
   const isRunning = statusKind === 'running';
   const isMission = !!world.goal;
 
+  // Filename for the code download — based on the current world's name.
+  const downloadName = React.useMemo(() => {
+    const meta = selectedWorldId ? allWorlds.find(w => w.id === selectedWorldId) : null;
+    const base = meta?.name ?? t('app.freePlayFile');
+    return safeFileName(base) + '.py';
+  }, [selectedWorldId, allWorlds, t]);
+
   return (
     <div className="app-root" style={{ gridTemplateColumns: `1fr 6px ${sidebarWidth}px` }}>
       <div className="left-col">
@@ -344,7 +389,7 @@ export default function App() {
       />
       <div className="side-panel">
         <div className="editor-result-wrap" ref={wrapRef} style={{ gridTemplateRows: `minmax(0, 1fr) 6px ${resultHeight}px` }}>
-          <Editor code={code} onChange={setCode} activeLine={activeLine} errorLine={errorLine} />
+          <Editor code={code} onChange={setCode} activeLine={activeLine} errorLine={errorLine} downloadName={downloadName} />
           <div
             className="h-resizer"
             onMouseDown={startResultDrag}

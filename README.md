@@ -55,6 +55,7 @@ The original Reeborg's World is a 2D grid with a classic interface. This project
 - **Visual Map Maker** — build worlds by clicking: walls, tiles, objects, and goals. Save, test, and export to JSON — no coding required.
 - **Random worlds without code** — bundle several map *variants*; one is shown at random each run, so a single solution must generalize.
 - **Progress & solutions** — cleared missions are remembered (localStorage), and worlds can ship an optional **"Solution"** to reveal.
+- **Your code is saved** — each mission keeps its own code in the browser (localStorage), so switching missions or refreshing restores exactly what you last typed.
 - **Korean / English** — full in-app language toggle for both the learning page and the map maker.
 
 <p align="center">

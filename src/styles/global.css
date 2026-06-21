@@ -957,6 +957,21 @@ button:not(.btn):not(.viewport-btn):not(.tool-card):not(.lang-opt):not(.help-fab
 .maker-code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
+.maker-preview-label {
+  margin-top: 0;
+  color: var(--text-muted);
+}
+.maker-desc-preview {
+  border: 1px dashed var(--panel-border);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  min-height: 40px;
+  max-height: 180px;
+  overflow: auto;
+  background: #fff;
+}
+.maker-desc-preview > :first-child { margin-top: 0; }
+.maker-desc-preview > :last-child { margin-bottom: 0; }
 .maker-sol-head {
   display: flex;
   align-items: center;

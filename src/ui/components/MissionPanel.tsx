@@ -2,11 +2,12 @@ import React from 'react';
 import { Target, FlaskConical, CheckCircle2, Square, ChevronDown, ChevronUp } from 'lucide-react';
 import type { GoalCheckItem } from '../../core/world/goal';
 import { useI18n } from '../i18n';
+import { renderMarkdown } from '../markdown';
 
 const COLLAPSE_KEY = 'reeborg3d.missionCollapsed';
 
 interface Props {
-  // HTML description from the world JSON (trusted local content).
+  // World description (Markdown, with raw HTML allowed) — rendered to sanitized HTML.
   html?: string;
   // Whether this world defines a goal (mission) vs. free play.
   isMission?: boolean;
@@ -18,6 +19,7 @@ interface Props {
 export function MissionPanel({ html, isMission = false, checks = [], showChecks = false }: Props) {
   const { t } = useI18n();
   const hasDesc = !!html && html.trim().length > 0;
+  const rendered = React.useMemo(() => renderMarkdown(html), [html]);
   const [collapsed, setCollapsed] = React.useState<boolean>(() => {
     try {
       return localStorage.getItem(COLLAPSE_KEY) === '1';
@@ -55,7 +57,7 @@ export function MissionPanel({ html, isMission = false, checks = [], showChecks 
         </button>
       </div>
       {!collapsed && (hasDesc ? (
-        <div className="mission-body" dangerouslySetInnerHTML={{ __html: html! }} />
+        <div className="mission-body" dangerouslySetInnerHTML={{ __html: rendered }} />
       ) : (
         <div className="mission-body mission-empty">
           {isMission ? t('mission.missionEmpty') : t('mission.freeEmpty')}

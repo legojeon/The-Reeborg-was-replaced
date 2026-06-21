@@ -17,6 +17,7 @@ import {
 } from './makerModel';
 import { saveCustomWorld, getCustomWorld, deleteCustomWorld, listCustomWorlds } from '../customWorlds';
 import { useI18n, LangToggle } from '../i18n';
+import { renderMarkdown } from '../markdown';
 import { reasonToMessage } from '../messages';
 import { parsePythonError } from '../pythonErrors';
 import { validateSolution, type SolutionCheck, type SolutionReport } from './validateSolution';
@@ -55,6 +56,8 @@ export default function MapMaker() {
   const [zoom, setZoom] = React.useState<number>(1);
   // Store the i18n key (not the translated text) so the message follows the language.
   const [savedMsg, setSavedMsg] = React.useState<string>('');
+  // Live-rendered preview of the Markdown mission description.
+  const descPreview = React.useMemo(() => renderMarkdown(state.description), [state.description]);
   // Solution-check state: null = not run, [] while we wait on the first run.
   const [checking, setChecking] = React.useState<boolean>(false);
   const [checkReport, setCheckReport] = React.useState<SolutionReport | null>(null);
@@ -426,6 +429,12 @@ export default function MapMaker() {
           </div>
           <label className="maker-textarea-label"><BookOpen size={14} /> {t('mk.descLabel')}</label>
           <textarea className="maker-textarea" value={state.description} placeholder={t('mk.descPlaceholder')} onChange={e => setState(s => ({ ...s, description: e.target.value }))} />
+          {state.description.trim() && (
+            <>
+              <span className="maker-textarea-label maker-preview-label">{t('mk.descPreview')}</span>
+              <div className="maker-desc-preview mission-body" dangerouslySetInnerHTML={{ __html: descPreview }} />
+            </>
+          )}
           <div className="maker-sol-head">
             <label className="maker-textarea-label"><Lightbulb size={14} /> {t('mk.solLabel')}</label>
             <button className="btn maker-validate-btn" onClick={doValidate} disabled={checking}>

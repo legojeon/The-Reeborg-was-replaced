@@ -9,6 +9,10 @@
   <i>Write Python on the right, watch the robot act in the 3D world on the left.</i>
 </p>
 
+<p align="center">
+  <a href="https://atobot.coco.io.kr/"><b>Open the live app</b></a>
+</p>
+
 <p align="center">English · <a href="README.ko.md">한국어</a></p>
 
 ---

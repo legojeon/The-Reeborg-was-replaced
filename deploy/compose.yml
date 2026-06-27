@@ -1,0 +1,12 @@
+name: reeborg-3d
+
+services:
+  web:
+    image: reeborg-3d:local
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "${LISTEN_IP:?Set LISTEN_IP in deploy/.env}:${APP_PORT:?Set APP_PORT in deploy/.env}:80"
+    stop_grace_period: 10s

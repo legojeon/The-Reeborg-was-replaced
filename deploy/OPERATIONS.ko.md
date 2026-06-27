@@ -36,10 +36,9 @@ sudo usermod -aG docker "$USER"
 ### 3.1 저장소 내려받기
 
 ```bash
-sudo mkdir -p /opt/reeborg-3d
-sudo chown "$USER":"$(id -gn)" /opt/reeborg-3d
-git clone https://github.com/legojeon/The-Reeborg-was-replaced.git /opt/reeborg-3d
-cd /opt/reeborg-3d
+mkdir -p "$HOME/projects"
+git clone https://github.com/legojeon/The-Reeborg-was-replaced.git "$HOME/projects/reeborg-3d"
+cd "$HOME/projects/reeborg-3d"
 ```
 
 ### 3.2 서버 설정 만들기
@@ -76,7 +75,7 @@ docker compose --env-file deploy/.env -f deploy/compose.yml ps
 ### 4.1 컨테이너 상태
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 docker compose --env-file deploy/.env -f deploy/compose.yml ps
 docker compose --env-file deploy/.env -f deploy/compose.yml logs --tail=100 web
 ```
@@ -101,7 +100,7 @@ curl --fail "http://${LISTEN_IP}:${APP_PORT}/healthz"
 업데이트 직전 커밋을 임시 파일에 기록하면 문제가 생겼을 때 바로 되돌릴 수 있습니다.
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 git status --short
 git rev-parse HEAD > /tmp/reeborg-previous-commit
 git pull --ff-only
@@ -117,7 +116,7 @@ docker compose --env-file deploy/.env -f deploy/compose.yml logs --tail=100 web
 먼저 프로젝트 디렉터리로 이동합니다.
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 ```
 
 서비스 시작 또는 Compose 설정 반영:
@@ -151,7 +150,7 @@ docker compose --env-file deploy/.env -f deploy/compose.yml down
 최근 로그를 계속 확인합니다.
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 docker compose --env-file deploy/.env -f deploy/compose.yml logs -f --tail=200 web
 ```
 
@@ -162,7 +161,7 @@ docker compose --env-file deploy/.env -f deploy/compose.yml logs -f --tail=200 w
 업데이트 전에 기록한 커밋으로 돌아간 뒤 이미지를 다시 빌드합니다.
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 cat /tmp/reeborg-previous-commit
 git switch --detach "$(cat /tmp/reeborg-previous-commit)"
 docker compose --env-file deploy/.env -f deploy/compose.yml up -d --build
@@ -207,7 +206,7 @@ sudo reboot
 서버에 다시 연결된 뒤 자동 재시작 상태를 확인합니다.
 
 ```bash
-cd /opt/reeborg-3d
+cd "$HOME/projects/reeborg-3d"
 docker compose --env-file deploy/.env -f deploy/compose.yml ps
 docker compose --env-file deploy/.env -f deploy/compose.yml logs --tail=100 web
 ```

@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://atobot.coco.io.kr/"><b>배포된 앱 바로가기</b></a>
+  <a href="https://atobot.coco.io.kr/"><b>Reeborg_was_Replaced 바로가기</b></a>
 </p>
 
 <p align="center"><a href="README.md">English</a> · 한국어</p>

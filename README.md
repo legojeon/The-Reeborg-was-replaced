@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://atobot.coco.io.kr/"><b>Open the live app</b></a>
+  <a href="https://atobot.coco.io.kr/"><b>Open Reeborg_was_Replaced</b></a>
 </p>
 
 <p align="center">English · <a href="README.ko.md">한국어</a></p>

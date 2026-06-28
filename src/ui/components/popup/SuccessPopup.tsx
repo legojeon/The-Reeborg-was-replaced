@@ -1,5 +1,6 @@
 import React from 'react';
 import { ConfettiOverlay } from '../ConfettiOverlay';
+import { playOutcomeAudio } from '../../outcomeAudio';
 
 interface Props {
 	visible: boolean;
@@ -14,7 +15,6 @@ export function SuccessPopup({ visible, title = 'Success!', message = '목표를
 	const timerRef = React.useRef<number | null>(null);
 	const fxLayerRef = React.useRef<HTMLDivElement | null>(null);
 	const playedRef = React.useRef<boolean>(false);
-	const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
 	React.useEffect(() => {
 		if (!visible) return;
@@ -35,21 +35,11 @@ export function SuccessPopup({ visible, title = 'Success!', message = '목표를
 	React.useEffect(() => {
 		if (!visible) {
 			playedRef.current = false;
-			// stop any playing audio when hidden
-			try { audioRef.current?.pause(); } catch {}
 			return;
 		}
 		if (playedRef.current) return;
 		playedRef.current = true;
-		try {
-			const url = new URL('../../../assets/sounds/success.mp3', import.meta.url).href;
-			const a = new Audio(url);
-			audioRef.current = a;
-			a.volume = 1.0;
-			void a.play().catch(() => {});
-		} catch {
-			// ignore playback errors
-		}
+		void playOutcomeAudio('success').catch(() => {});
 	}, [visible]);
 
 	if (!visible) return null;
@@ -105,5 +95,4 @@ export function SuccessPopup({ visible, title = 'Success!', message = '목표를
 		</div>
 	);
 }
-
 

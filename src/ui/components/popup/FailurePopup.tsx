@@ -1,5 +1,6 @@
 import React from 'react';
 import { playJumpingRobotBottomLeft } from '../../../core/renderer/effects/jumpingRobot';
+import { playOutcomeAudio } from '../../outcomeAudio';
 
 interface Props {
 	visible: boolean;
@@ -15,7 +16,6 @@ interface Props {
 export function FailurePopup({ visible, title = '실패', message = '다시 시도해보세요.', detail, sizePx = 400, confirmLabel = '확인', onClose }: Props) {
 	const stopRef = React.useRef<null | { stop: () => void }>(null);
 	const playedRef = React.useRef<boolean>(false);
-	const audioRef = React.useRef<HTMLAudioElement | null>(null);
 
 	React.useEffect(() => {
 		if (!visible) return;
@@ -34,20 +34,11 @@ export function FailurePopup({ visible, title = '실패', message = '다시 시�
 	React.useEffect(() => {
 		if (!visible) {
 			playedRef.current = false;
-			try { audioRef.current?.pause(); } catch {}
 			return;
 		}
 		if (playedRef.current) return;
 		playedRef.current = true;
-		try {
-			const url = new URL('../../../assets/sounds/fail.mp3', import.meta.url).href;
-			const a = new Audio(url);
-			audioRef.current = a;
-			a.volume = 1.0;
-			void a.play().catch(() => {});
-		} catch {
-			// ignore
-		}
+		void playOutcomeAudio('fail').catch(() => {});
 	}, [visible]);
 
 	if (!visible) return null;
@@ -115,5 +106,4 @@ export function FailurePopup({ visible, title = '실패', message = '다시 시�
 		</div>
 	);
 }
-
 

@@ -2,6 +2,7 @@ import type { Engine } from '../engine/engine';
 import type { Direction, World } from '../types/types';
 import type { ObjectKind } from '../world/objectKinds';
 import { evaluateGoal } from '../world/goal';
+import { transformRepeatSyntax } from './repeatSyntax';
 
 declare global {
   interface Window {
@@ -427,7 +428,7 @@ def print(*args, sep=' ', end='\\n'):
     }
     // Execute user code only; we do not auto-invoke any run() function.
     try {
-      await py.runPythonAsync(code);
+      await py.runPythonAsync(transformRepeatSyntax(code));
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error('[Pyodide] runUserCode error', err);
@@ -448,5 +449,4 @@ def print(*args, sep=' ', end='\\n'):
 
   return { init, runUserCode, getPaceMs, setStdoutHandler, setStderrHandler };
 }
-
 

@@ -74,6 +74,7 @@ const API_COMPLETIONS = [
 // label to a single keyword stops multi-word templates (e.g. the for-loop) from
 // fuzzy-matching a word in the middle of a line and duplicating text.
 const KEYWORD_COMPLETIONS = [
+  { label: 'repeat', apply: 'repeat 3:', detail: '3:', type: 'keyword', info: '지정한 횟수만큼 반복하기' },
   { label: 'if', apply: 'if ', type: 'keyword', info: '만약 ~라면' },
   { label: 'elif', apply: 'elif ', type: 'keyword', info: '그렇지 않고 만약 ~라면' },
   { label: 'else', apply: 'else:', type: 'keyword', info: '그렇지 않으면' },

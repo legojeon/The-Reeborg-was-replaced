@@ -4,6 +4,7 @@ import { useI18n } from '../i18n';
 // Command reference shown in the help popup. Each entry pairs the literal Python
 // command with an i18n key for its description.
 const COMMANDS: Array<[string, string]> = [
+  ['repeat n:', 'help.repeat'],
   ['move()', 'help.move'],
   ['turn_left()', 'help.turn_left'],
   ['take()', 'help.take'],

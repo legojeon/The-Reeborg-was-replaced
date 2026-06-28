@@ -6,6 +6,7 @@ import { reasonToMessage } from './messages';
 import { evaluateGoalDetail, type GoalCheckItem } from '../core/world/goal';
 import { parsePythonError } from './pythonErrors';
 import { tr, type Lang } from './i18n';
+import { unlockOutcomeAudio } from './outcomeAudio';
 
 type StatusKind = 'info' | 'running' | 'error';
 
@@ -227,6 +228,9 @@ export function useExecution(world: World, code: string, lang: Lang = 'ko') {
   }
 
   async function handleRun() {
+    // This runs synchronously inside the Run button's click handler. Resuming
+    // Web Audio here preserves permission for sounds played after async work.
+    unlockOutcomeAudio();
     clearRunTimer();
     setReverseTurn(false);
     setOutput('');

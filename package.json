@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview --host --port 4173"
+    "preview": "vite preview --host --port 4173",
+    "test": "node --no-warnings --experimental-strip-types --test tests/*.test.ts"
   },
   "keywords": [],
   "author": "",
